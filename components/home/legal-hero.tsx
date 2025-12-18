@@ -1,0 +1,125 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Scale, ArrowRight, Phone } from "lucide-react"
+import Link from "next/link"
+import { siteConfig } from "@/data/site"
+
+export function LegalHero() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
+  return (
+    <section className="relative overflow-hidden min-h-screen flex flex-col">
+      <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col">
+        <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">
+          {/* Badge - Updated to English */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
+              <Scale className="h-4 w-4" />
+              Professional Legal Services
+            </Badge>
+          </motion.div>
+
+          {/* Main Heading - Updated to English */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-8"
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance">
+              <span className="block">{siteConfig.name}</span>
+              <span className="block mt-2 text-primary">{siteConfig.title}</span>
+            </h1>
+          </motion.div>
+
+          {/* Description - Updated to English */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground text-pretty"
+          >
+            {siteConfig.experience} — Your trusted partner for professional protection of your rights and effective
+            dispute resolution through expert legal representation and certified mediation.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            {/* Primary CTA - Updated to English */}
+            <Link href="/contact">
+              <div className="group cursor-pointer border border-border bg-card gap-2 h-[60px] flex items-center p-[10px] rounded-full">
+                <div className="border border-border bg-primary h-[40px] rounded-full flex items-center justify-center text-primary-foreground">
+                  <p className="font-medium tracking-tight mr-3 ml-3 flex items-center gap-2 justify-center text-base">
+                    <Scale className="h-5 w-5" />
+                    Request Legal Help
+                  </p>
+                </div>
+                <div className="text-muted-foreground group-hover:ml-4 ease-in-out transition-all size-[24px] flex items-center justify-center rounded-full border-2 border-border">
+                  <ArrowRight className="h-4 w-4 group-hover:rotate-45 ease-in-out transition-all" />
+                </div>
+              </div>
+            </Link>
+
+            {/* Secondary CTA */}
+            <a
+              href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+              className="flex items-center gap-2 px-6 py-3 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Phone className="h-5 w-5" />
+              <span className="font-medium">{siteConfig.phone}</span>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Trust Indicators - Updated to English */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-auto pb-8"
+        >
+          <div className="text-center">
+            <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16">
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-foreground">15+</p>
+                <p className="text-sm text-muted-foreground">Years Experience</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-foreground">500+</p>
+                <p className="text-sm text-muted-foreground">Successful Cases</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-foreground">1000+</p>
+                <p className="text-sm text-muted-foreground">Satisfied Clients</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-foreground">98%</p>
+                <p className="text-sm text-muted-foreground">Success Rate</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
