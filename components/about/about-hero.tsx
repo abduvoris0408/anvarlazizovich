@@ -1,59 +1,41 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { User, Award, Scale } from "lucide-react"
-import { siteConfig } from "@/data/site"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
+import type { About } from "@/lib/types"
+
 
 export function AboutHero() {
+  const [about, setAbout] = useState<About | null>(null)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+  }, [])
+
+  const name = about?.fullName || "Burxonov Anvar Lazizovich"
+  const title = about?.title || "Lawyer & Certified Mediator"
+
   return (
     <section className="relative overflow-hidden py-24 sm:py-32">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
           >
-            <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <User className="h-4 w-4" />
-              Men haqimda
-            </Badge>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6"
-          >
-            {siteConfig.name}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-primary font-medium mb-8"
-          >
-            {siteConfig.title}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-wrap gap-4"
-          >
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Scale className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">O'zbekiston Advokatura palatasi a'zosi</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Award className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Sertifikatlangan Mediator</span>
-            </div>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-4">
+              {name}
+            </h1>
+            <p className="text-xl text-primary font-medium mb-6">{title}</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Professional advokat va sertifikatlangan mediator haqida batafsil ma&apos;lumot
+            </p>
           </motion.div>
         </div>
       </div>

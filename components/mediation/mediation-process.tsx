@@ -2,8 +2,13 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { mediationData } from "@/data/mediation"
 
+const processSteps = [
+  { step: 1, title: "Dastlabki konsultatsiya", description: "Tomonlar bilan alohida suhbat va mediatsiya jarayonini tushuntirish." },
+  { step: 2, title: "Birgalikdagi sessiya", description: "Tomonlarni bir joyga to'plash va muammoni muhokama qilish." },
+  { step: 3, title: "Muzokaralar", description: "Tomonlarning manfaatlarini aniqlash va yechim variantlarini izlash." },
+  { step: 4, title: "Kelishuv", description: "O'zaro maqbul yechimga erishish va kelishuv hujjatini tuzish." },
+]
 export function MediationProcess() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -33,7 +38,7 @@ export function MediationProcess() {
             <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block" />
 
             <div className="space-y-8">
-              {mediationData.process.map((step, index) => (
+              {processSteps.map((step, index) => (
                 <motion.div
                   key={step.step}
                   initial={{ opacity: 0, x: -20 }}

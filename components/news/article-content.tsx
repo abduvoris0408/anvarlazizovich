@@ -3,10 +3,10 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react"
-import type { Article } from "@/data/news"
+import type { News } from "@/lib/types"
 
 interface ArticleContentProps {
-  article: Article
+  article: News
 }
 
 export function ArticleContent({ article }: ArticleContentProps) {
@@ -39,7 +39,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
               </span>
               <span className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                {new Date(article.date).toLocaleDateString("en-US", {
+                {new Date(article.publishedAt || article.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

@@ -2,8 +2,16 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { mediationData } from "@/data/mediation"
 import { Check, Handshake } from "lucide-react"
+
+const whenToUse = [
+  "Biznes hamkorlar o'rtasidagi nizolar",
+  "Oilaviy kelishmovchiliklar",
+  "Mulkiy nizolar",
+  "Mehnat nizolari",
+  "Shartnomaviy nizolar",
+  "Qo'shnilar o'rtasidagi nizolar",
+]
 
 export function WhenToUse() {
   const ref = useRef(null)
@@ -65,7 +73,7 @@ export function WhenToUse() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="space-y-4"
               >
-                {mediationData.whenToUse.map((item, index) => (
+                {whenToUse.map((item, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -20 }}

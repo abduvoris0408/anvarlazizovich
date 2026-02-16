@@ -1,10 +1,13 @@
+
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
 import { LegalHero } from "@/components/home/legal-hero"
+import { PartnersSection } from "@/components/home/partners-section"
 import { PracticePreview } from "@/components/home/practice-preview"
 import { MediationPreview } from "@/components/home/mediation-preview"
 import { ArticlesPreview } from "@/components/home/articles-preview"
 import { TestimonialsSection } from "@/components/home/testimonials-section"
+import { FAQSection } from "@/components/home/faq-section"
 import { CTASection } from "@/components/home/cta-section"
 
 export default function Home() {
@@ -20,12 +23,15 @@ export default function Home() {
 
       <Header />
 
+
       <main className="relative z-10">
         <LegalHero />
+        <PartnersSection />
         <PracticePreview />
         <MediationPreview />
         <ArticlesPreview />
         <TestimonialsSection />
+        <FAQSection />
         <CTASection />
       </main>
 

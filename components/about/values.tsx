@@ -4,8 +4,26 @@ import type React from "react"
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { aboutData } from "@/data/about"
 import { Heart, Shield, Target, Lock } from "lucide-react"
+
+const values = [
+  {
+    title: "Halollik",
+    description: "Har bir ishda halollik va oshkoralik tamoyillariga amal qilish.",
+  },
+  {
+    title: "Professional yondashuv",
+    description: "Har bir mijozga individual va professional yondashuv.",
+  },
+  {
+    title: "Natijaga yo'nalganlik",
+    description: "Mijozning manfaatlarini himoya qilish va eng yaxshi natijaga erishish.",
+  },
+  {
+    title: "Maxfiylik",
+    description: "Mijozlar ma'lumotlarining to'liq maxfiyligini ta'minlash.",
+  },
+]
 
 const iconMap: Record<string, React.ElementType> = {
   Halollik: Shield,
@@ -39,7 +57,7 @@ export function Values() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-6">
-            {aboutData.values.map((value, index) => {
+            {values.map((value, index) => {
               const IconComponent = iconMap[value.title] || Shield
               return (
                 <motion.div
@@ -48,7 +66,8 @@ export function Values() {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="p-6 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+
+                  className="p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">

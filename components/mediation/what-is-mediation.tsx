@@ -2,8 +2,14 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { mediationData } from "@/data/mediation"
 import { Scale, Users } from "lucide-react"
+
+const whatIs = {
+  title: "Mediatsiya nima?",
+  description: `Mediatsiya - bu nizolarni hal qilishning muqobil usuli bo'lib, unda neytral uchinchi tomon (mediator) nizolashayotgan tomonlarga o'zaro maqbul yechim topishda yordam beradi.
+
+Mediatsiya jarayonida mediator qaror qabul qilmaydi, balki tomonlarni muloqotga yo'naltiradi va ularning manfaatlarini aniqlashga yordam beradi.`,
+}
 
 export function WhatIsMediation() {
   const ref = useRef(null)
@@ -38,7 +44,7 @@ export function WhatIsMediation() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-3xl md:text-4xl font-bold text-foreground mb-6"
               >
-                {mediationData.whatIs.title}
+                {whatIs.title}
               </motion.h2>
 
               <motion.div
@@ -47,7 +53,7 @@ export function WhatIsMediation() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="prose prose-lg dark:prose-invert max-w-none"
               >
-                {mediationData.whatIs.description.split("\n\n").map((paragraph, index) => (
+                {whatIs.description.split("\n\n").map((paragraph: string, index: number) => (
                   <p key={index} className="text-muted-foreground leading-relaxed">
                     {paragraph}
                   </p>

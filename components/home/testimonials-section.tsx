@@ -1,11 +1,8 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Marquee } from "@/components/magicui/marquee"
-import { testimonials } from "@/data/testimonials"
-
-const firstColumn = testimonials.slice(0, 2)
-const secondColumn = testimonials.slice(2, 4)
-const thirdColumn = testimonials.slice(4, 6)
+import type { Testimonial } from "@/lib/types"
 
 const TestimonialCard = ({
   image,
@@ -19,8 +16,8 @@ const TestimonialCard = ({
   content: string
 }) => {
   return (
-    <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-10 shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset]">
-      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md"></div>
+    <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 bg-white/5 dark:bg-gradient-to-b dark:from-white/5 dark:to-white/[0.02] p-10 shadow-lg">
+      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-primary/5 dark:bg-primary/10 blur-md"></div>
 
       <div className="text-foreground/90 leading-relaxed">{content}</div>
 
@@ -41,7 +38,51 @@ const TestimonialCard = ({
   )
 }
 
+
 export function TestimonialsSection() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/testimonials?limit=100")
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.data) setTestimonials(d.data)
+      })
+      .catch(() => { })
+      .finally(() => setIsLoading(false))
+  }, [])
+
+  if (!isLoading && testimonials.length === 0) {
+    return (
+      <section className="mb-24 px-4">
+        <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
+          <p className="text-muted-foreground">Mijozlar fikri hozircha mavjud emas.</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <section className="mb-24 px-4">
+        <div className="glass-effect rounded-3xl p-12 text-center max-w-4xl mx-auto">
+          <div className="h-8 w-48 bg-muted rounded-md mx-auto mb-10 animate-pulse" />
+          <div className="grid md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-64 glass-card rounded-3xl animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  const colSize = Math.ceil(testimonials.length / 3)
+  const firstColumn = testimonials.slice(0, colSize)
+  const secondColumn = testimonials.slice(colSize, colSize * 2)
+  const thirdColumn = testimonials.slice(colSize * 2)
+
   return (
     <section className="mb-24">
       <div className="mx-auto max-w-7xl">
@@ -68,27 +109,49 @@ export function TestimonialsSection() {
         <div className="my-16 flex max-h-[738px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
           <div>
             <Marquee pauseOnHover vertical className="[--duration:20s]">
-              {firstColumn.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} {...testimonial} />
+              {firstColumn.map((t) => (
+                <TestimonialCard
+                  key={t.id}
+                  image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
+                  name={t.name || t.clientName}
+                  role={t.role || t.clientPosition}
+                  content={t.content}
+                />
               ))}
             </Marquee>
           </div>
 
-          <div className="hidden md:block">
-            <Marquee reverse pauseOnHover vertical className="[--duration:25s]">
-              {secondColumn.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} {...testimonial} />
-              ))}
-            </Marquee>
-          </div>
+          {secondColumn.length > 0 && (
+            <div className="hidden md:block">
+              <Marquee reverse pauseOnHover vertical className="[--duration:25s]">
+                {secondColumn.map((t) => (
+                  <TestimonialCard
+                    key={t.id}
+                    image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
+                    name={t.name || t.clientName}
+                    role={t.role || t.clientPosition}
+                    content={t.content}
+                  />
+                ))}
+              </Marquee>
+            </div>
+          )}
 
-          <div className="hidden lg:block">
-            <Marquee pauseOnHover vertical className="[--duration:30s]">
-              {thirdColumn.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} {...testimonial} />
-              ))}
-            </Marquee>
-          </div>
+          {thirdColumn.length > 0 && (
+            <div className="hidden lg:block">
+              <Marquee pauseOnHover vertical className="[--duration:30s]">
+                {thirdColumn.map((t) => (
+                  <TestimonialCard
+                    key={t.id}
+                    image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
+                    name={t.name || t.clientName}
+                    role={t.role || t.clientPosition}
+                    content={t.content}
+                  />
+                ))}
+              </Marquee>
+            </div>
+          )}
         </div>
       </div>
     </section>

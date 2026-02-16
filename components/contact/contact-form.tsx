@@ -16,16 +16,40 @@ export function ContactForm() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
+    setError("")
 
-    // Simulate form submission (replace with actual API call in production)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const formData = new FormData(e.currentTarget)
+
+    const payload = {
+      name: formData.get("fullName") as string,
+      phone: formData.get("phone") as string,
+      email: (formData.get("email") as string) || undefined,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    }
+
+    try {
+      const res = await fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/contacts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      if (res.ok) {
+        setIsSubmitted(true)
+      } else {
+        setError("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.")
+      }
+    } catch {
+      setError("Tarmoq xatoligi. Iltimos internetni tekshiring.")
+    }
 
     setIsLoading(false)
-    setIsSubmitted(true)
   }
 
   if (isSubmitted) {
@@ -41,8 +65,8 @@ export function ContactForm() {
           <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="h-8 w-8 text-green-500" />
           </div>
-          <h3 className="text-2xl font-bold text-foreground mb-4">Your Request Has Been Received!</h3>
-          <p className="text-muted-foreground">We will contact you soon. Usually we respond within 24 hours.</p>
+          <h3 className="text-2xl font-bold text-foreground mb-4">Murojaatingiz qabul qilindi!</h3>
+          <p className="text-muted-foreground">Tez orada siz bilan bog&apos;lanamiz. Odatda 24 soat ichida javob beramiz.</p>
         </div>
       </motion.div>
     )
@@ -62,8 +86,8 @@ export function ContactForm() {
             <Scale className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Request Legal Help</h2>
-            <p className="text-sm text-muted-foreground">Fill out the form below</p>
+            <h2 className="text-2xl font-bold text-foreground">Huquqiy yordam so&apos;rash</h2>
+            <p className="text-sm text-muted-foreground">Quyidagi formani to&apos;ldiring</p>
           </div>
         </div>
 
@@ -71,13 +95,19 @@ export function ContactForm() {
         <div className="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/10 mb-8">
           <Shield className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm text-foreground font-medium">Your information is confidential</p>
+            <p className="text-sm text-foreground font-medium">Ma&apos;lumotlaringiz maxfiy saqlanadi</p>
             <p className="text-sm text-muted-foreground">
-              Share your legal concerns with us. All communications are protected by attorney-client privilege. We are
-              here to help you find the best solution for your situation.
+              Huquqiy muammolaringizni biz bilan baham ko&apos;ring. Barcha muloqotlar advokat-mijoz maxfiyligi bilan
+              himoyalangan.
             </p>
           </div>
         </div>
+
+        {error && (
+          <div className="mb-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Full Name */}
@@ -87,14 +117,14 @@ export function ContactForm() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Label htmlFor="fullName" className="text-foreground font-medium">
-              Full Name <span className="text-destructive">*</span>
+              To&apos;liq ism <span className="text-destructive">*</span>
             </Label>
             <Input
               id="fullName"
               name="fullName"
               type="text"
               required
-              placeholder="Enter your full name"
+              placeholder="Ismingizni kiriting"
               className="mt-2 bg-background border-border focus:border-primary h-12"
             />
           </motion.div>
@@ -106,7 +136,7 @@ export function ContactForm() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Label htmlFor="phone" className="text-foreground font-medium">
-              Phone Number <span className="text-destructive">*</span>
+              Telefon raqam <span className="text-destructive">*</span>
             </Label>
             <Input
               id="phone"
@@ -125,7 +155,7 @@ export function ContactForm() {
             transition={{ duration: 0.5, delay: 0.25 }}
           >
             <Label htmlFor="email" className="text-foreground font-medium">
-              Email Address
+              Email manzil
             </Label>
             <Input
               id="email"
@@ -143,14 +173,14 @@ export function ContactForm() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Label htmlFor="subject" className="text-foreground font-medium">
-              Subject <span className="text-destructive">*</span>
+              Mavzu <span className="text-destructive">*</span>
             </Label>
             <Input
               id="subject"
               name="subject"
               type="text"
               required
-              placeholder="e.g., Business Contract Review"
+              placeholder="Masalan: Shartnoma ko'rib chiqish"
               className="mt-2 bg-background border-border focus:border-primary h-12"
             />
           </motion.div>
@@ -162,13 +192,13 @@ export function ContactForm() {
             transition={{ duration: 0.5, delay: 0.35 }}
           >
             <Label htmlFor="message" className="text-foreground font-medium">
-              Your Message <span className="text-destructive">*</span>
+              Xabaringiz <span className="text-destructive">*</span>
             </Label>
             <Textarea
               id="message"
               name="message"
               required
-              placeholder="Please describe your legal issue or question in detail..."
+              placeholder="Huquqiy masalangiz yoki savolingizni batafsil tavsiflang..."
               rows={6}
               className="mt-2 bg-background border-border focus:border-primary resize-none"
             />
@@ -204,12 +234,12 @@ export function ContactForm() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     />
                   </svg>
-                  Sending...
+                  Yuborilmoqda...
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
                   <Send className="h-5 w-5" />
-                  Submit Request
+                  Yuborish
                 </span>
               )}
             </Button>

@@ -3,9 +3,9 @@
 import type React from "react"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
-import { practiceAreas } from "@/data/practice-areas"
+import type { Service } from "@/lib/types"
 import { Scale, Shield, Heart, Briefcase, Building, ArrowRight } from "lucide-react"
 
 const iconMap: Record<string, React.ElementType> = {
@@ -19,6 +19,16 @@ const iconMap: Record<string, React.ElementType> = {
 export function PracticePreview() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [services, setServices] = useState<Service[]>([])
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/services?limit=100")
+      .then((r) => r.json())
+      .then((d) => d.data && setServices(d.data))
+      .catch(() => { })
+  }, [])
+
+  if (services.length === 0) return null
 
   return (
     <section className="relative overflow-hidden py-24">
@@ -37,7 +47,8 @@ export function PracticePreview() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
+
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6"
           >
             <Scale className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground/80">Amaliyot sohalari</span>
@@ -47,21 +58,22 @@ export function PracticePreview() {
             Huquqiy xizmatlar
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Keng ko'lamli huquqiy masalalarda professional yordam va maslahatlar
+            Keng ko&apos;lamli huquqiy masalalarda professional yordam va maslahatlar
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {practiceAreas.slice(0, 3).map((area, index) => {
-            const IconComponent = iconMap[area.icon] || Scale
+          {services.slice(0, 3).map((service, index) => {
+            const IconComponent = iconMap[service.icon] || Scale
             return (
               <motion.div
-                key={area.id}
+                key={service.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative rounded-2xl p-8 backdrop-blur-sm border border-white/10 bg-gradient-to-b from-white/5 to-transparent hover:border-primary/30 transition-all duration-300"
+
+                className="group relative rounded-2xl p-8 backdrop-blur-sm border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent hover:border-primary/30 transition-all duration-300"
               >
                 <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md"></div>
 
@@ -69,19 +81,21 @@ export function PracticePreview() {
                   <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
                     <IconComponent className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground">{area.title}</h3>
+                  <h3 className="text-xl font-semibold text-foreground">{service.title}</h3>
                 </div>
 
-                <p className="text-muted-foreground mb-4">{area.description}</p>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
 
-                <ul className="space-y-2">
-                  {area.details.slice(0, 2).map((detail, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
+                {service.ServiceDetails && service.ServiceDetails.length > 0 && (
+                  <ul className="space-y-2">
+                    {service.ServiceDetails.slice(0, 2).map((detail) => (
+                      <li key={detail.id} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                        {detail.title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </motion.div>
             )
           })}
@@ -97,7 +111,7 @@ export function PracticePreview() {
             href="/practice"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/30 bg-primary/5 text-foreground hover:bg-primary/10 transition-all duration-300 group"
           >
-            Barcha xizmatlarni ko'rish
+            Barcha xizmatlarni ko&apos;rish
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>

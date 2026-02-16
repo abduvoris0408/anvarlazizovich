@@ -1,13 +1,23 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { aboutData } from "@/data/about"
+import { useRef, useState, useEffect } from "react"
+import type { Education as EducationType } from "@/lib/types"
 import { GraduationCap, Award } from "lucide-react"
 
 export function Education() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [education, setEducation] = useState<EducationType[]>([])
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/education?limit=100")
+      .then((r) => r.json())
+      .then((d) => d.data && setEducation(d.data))
+      .catch(() => { })
+  }, [])
+
+  if (education.length === 0) return null
 
   return (
     <section className="py-16 bg-muted/30">
@@ -25,25 +35,27 @@ export function Education() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6">
               <GraduationCap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground/80">Ta'lim</span>
+              <span className="text-sm font-medium text-foreground/80">Ta&apos;lim</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ta'lim va sertifikatlar</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ta&apos;lim va sertifikatlar</h2>
           </motion.div>
 
           <div className="space-y-6">
-            {aboutData.education.map((edu, index) => (
+            {education.map((edu, index) => (
               <motion.div
-                key={index}
+                key={edu.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                className="flex items-start gap-4 p-6 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+
+                className="flex items-start gap-4 p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm"
               >
                 <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
-                  {edu.degree.includes("sertifikat") ? (
+                  {edu.degree.toLowerCase().includes("sertifikat") ? (
                     <Award className="h-6 w-6 text-primary" />
                   ) : (
                     <GraduationCap className="h-6 w-6 text-primary" />

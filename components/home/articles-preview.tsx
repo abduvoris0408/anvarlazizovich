@@ -1,14 +1,24 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
-import { articles } from "@/data/news"
+import type { News } from "@/lib/types"
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react"
 
 export function ArticlesPreview() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [articles, setArticles] = useState<News[]>([])
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=3")
+      .then((r) => r.json())
+      .then((d) => d.data && setArticles(d.data))
+      .catch(() => { })
+  }, [])
+
+  if (articles.length === 0) return null
 
   return (
     <section className="relative overflow-hidden py-24">
@@ -24,22 +34,23 @@ export function ArticlesPreview() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
+
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6"
           >
             <BookOpen className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground/80">Yangiliklar va maqolalar</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent mb-4">
-            So'nggi maqolalar
+            So&apos;nggi maqolalar
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Huquqiy soha bo'yicha foydali ma'lumotlar va yangiliklar
+            Huquqiy soha bo&apos;yicha foydali ma&apos;lumotlar va yangiliklar
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {articles.slice(0, 3).map((article, index) => (
+          {articles.map((article, index) => (
             <motion.article
               key={article.id}
               initial={{ opacity: 0, y: 20 }}
@@ -48,8 +59,9 @@ export function ArticlesPreview() {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <Link href={`/news/${article.slug}`}>
-                <div className="relative rounded-2xl p-6 backdrop-blur-sm border border-white/10 bg-gradient-to-b from-white/5 to-transparent hover:border-primary/30 transition-all duration-300 h-full">
+              <Link href={`/news/${article.slug || article.id}`}>
+
+                <div className="relative rounded-2xl p-6 backdrop-blur-sm border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent hover:border-primary/30 transition-all duration-300 h-full">
                   <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                   <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
@@ -58,12 +70,14 @@ export function ArticlesPreview() {
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      {new Date(article.date).toLocaleDateString("uz-UZ")}
+                      {new Date(article.publishedAt || article.createdAt).toLocaleDateString("uz-UZ")}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      {article.readTime}
-                    </span>
+                    {article.readTime && (
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {article.readTime}
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
@@ -73,7 +87,7 @@ export function ArticlesPreview() {
                   <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{article.excerpt}</p>
 
                   <span className="inline-flex items-center gap-2 text-sm text-primary font-medium group-hover:gap-3 transition-all">
-                    O'qish
+                    O&apos;qish
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </div>
@@ -92,7 +106,7 @@ export function ArticlesPreview() {
             href="/news"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/30 bg-primary/5 text-foreground hover:bg-primary/10 transition-all duration-300 group"
           >
-            Barcha maqolalarni ko'rish
+            Barcha maqolalarni ko&apos;rish
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>

@@ -1,37 +1,50 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { siteConfig } from "@/data/site"
+import { useRef, useState, useEffect } from "react"
+import type { About } from "@/lib/types"
 import { Phone, Mail, Send, MapPin, Clock } from "lucide-react"
 
 export function ContactInfo() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [about, setAbout] = useState<About | null>(null)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+  }, [])
+
+  const phone = about?.phone || "+998 90 123 45 67"
+  const email = about?.email || "info@burxonov.uz"
+  const telegram = about?.telegram || "@burxonov_advokat"
+  const address = about?.address || "Toshkent shahri"
 
   const contactItems = [
     {
       icon: Phone,
-      label: "Phone",
-      value: siteConfig.phone,
-      href: `tel:${siteConfig.phone.replace(/\s/g, "")}`,
+      label: "Telefon",
+      value: phone,
+      href: `tel:${phone.replace(/\s/g, "")}`,
     },
     {
       icon: Mail,
       label: "Email",
-      value: siteConfig.email,
-      href: `mailto:${siteConfig.email}`,
+      value: email,
+      href: `mailto:${email}`,
     },
     {
       icon: Send,
       label: "Telegram",
-      value: siteConfig.telegram,
-      href: `https://t.me/${siteConfig.telegram.replace("@", "")}`,
+      value: telegram,
+      href: `https://t.me/${telegram.replace("@", "")}`,
     },
     {
       icon: MapPin,
-      label: "Address",
-      value: siteConfig.address,
+      label: "Manzil",
+      value: address,
       href: null,
     },
   ]
@@ -46,7 +59,7 @@ export function ContactInfo() {
     >
       {/* Contact Info Card */}
       <div className="rounded-2xl border border-border bg-card p-8">
-        <h2 className="text-2xl font-bold text-foreground mb-6">Contact Information</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-6">Bog&apos;lanish ma&apos;lumotlari</h2>
 
         <div className="space-y-4">
           {contactItems.map((item, index) => (
@@ -100,25 +113,25 @@ export function ContactInfo() {
           <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
             <Clock className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-xl font-bold text-foreground">Working Hours</h3>
+          <h3 className="text-xl font-bold text-foreground">Ish vaqti</h3>
         </div>
 
         <div className="space-y-3">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Monday - Friday</span>
+            <span className="text-muted-foreground">Dushanba - Juma</span>
             <span className="text-foreground font-medium">09:00 - 18:00</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Saturday</span>
+            <span className="text-muted-foreground">Shanba</span>
             <span className="text-foreground font-medium">10:00 - 15:00</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Sunday</span>
-            <span className="text-foreground font-medium">Closed</span>
+            <span className="text-muted-foreground">Yakshanba</span>
+            <span className="text-foreground font-medium">Dam olish</span>
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">For urgent matters, you can reach us by phone at any time.</p>
+        <p className="mt-6 text-sm text-muted-foreground">Shoshilinch holatlarda istalgan vaqtda telefon orqali murojaat qilishingiz mumkin.</p>
       </motion.div>
     </motion.div>
   )

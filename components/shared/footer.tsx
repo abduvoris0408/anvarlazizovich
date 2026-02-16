@@ -1,38 +1,73 @@
 "use client"
 
-import Link from "next/link"
-import { siteConfig, navigation } from "@/data/site"
-import { Scale, Phone, Mail, Send, MapPin } from "lucide-react"
+
+import { Link, usePathname } from "@/i18n/routing"
+import { Scale, Phone, Mail, Send } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
+import { useState, useEffect } from "react"
+import type { About } from "@/lib/types"
+
+
+const navKeys = [
+  { key: "home", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "practice", href: "/practice" },
+  { key: "mediation", href: "/mediation" },
+  { key: "news", href: "/news" },
+  { key: "blog", href: "/blog" },
+] as const
+
 
 export function Footer() {
+  const locale = useLocale()
+  const t = useTranslations("footer")
+  const tNav = useTranslations("nav")
+
+  const [about, setAbout] = useState<About | null>(null)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+  }, [])
+
+  const phone = about?.phone || "+998 90 123 45 67"
+  const email = about?.email || "info@burxonov.uz"
+  const telegram = about?.telegram || "@burxonov_advokat"
+
+
+  const navigation = navKeys.map((item) => ({
+    name: tNav(item.key),
+    href: item.href,
+  }))
+
   return (
-    <footer className="relative z-10 bg-card border-t border-border mt-auto">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="py-16 border-t border-border">
+      <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* Brand Column */}
-            <div className="lg:col-span-2">
-              <Link href="/" className="flex items-center gap-3 mb-4">
-                <Scale className="h-8 w-8 text-primary" />
-                <div>
-                  <p className="font-bold text-foreground text-lg">{siteConfig.name}</p>
-                  <p className="text-sm text-muted-foreground">{siteConfig.title}</p>
-                </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Brand */}
+
+
+            <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <Link href="/" className="flex items-center gap-2 mb-4 justify-center sm:justify-start">
+                <Scale className="h-6 w-6 text-primary" />
+                <span className="font-bold text-foreground text-lg">Burxonov</span>
               </Link>
-              <p className="text-muted-foreground max-w-md">
-                Providing professional legal services and certified mediation with over 15 years of experience. Your
-                trusted partner in protecting your rights.
-              </p>
+              <p className="text-sm text-muted-foreground">{t("desc")}</p>
             </div>
 
-            {/* Navigation Column */}
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">Navigation</h3>
-              <ul className="space-y-3">
+            {/* Navigation */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <h3 className="font-semibold text-foreground mb-4">{t("pages")}</h3>
+              <ul className="space-y-3 w-full">
                 {navigation.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors block"
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -40,60 +75,72 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Contact Column */}
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">Contact</h3>
-              <ul className="space-y-3">
+            {/* Contact */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <h3 className="font-semibold text-foreground mb-4">{t("contactTitle")}</h3>
+              <ul className="space-y-3 w-full">
                 <li>
                   <a
-                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
                   >
-                    <Phone className="h-4 w-4 text-primary" />
-                    {siteConfig.phone}
+                    <Phone className="h-4 w-4" />
+                    {phone}
                   </a>
                 </li>
                 <li>
                   <a
-                    href={`mailto:${siteConfig.email}`}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
                   >
-                    <Mail className="h-4 w-4 text-primary" />
-                    {siteConfig.email}
+                    <Mail className="h-4 w-4" />
+                    {email}
                   </a>
                 </li>
                 <li>
                   <a
-                    href={`https://t.me/${siteConfig.telegram.replace("@", "")}`}
+                    href={`https://t.me/${telegram.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
                   >
-                    <Send className="h-4 w-4 text-primary" />
-                    {siteConfig.telegram}
+                    <Send className="h-4 w-4" />
+                    {telegram}
                   </a>
                 </li>
-                <li className="flex items-start gap-2 text-muted-foreground">
-                  <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                  <span>{siteConfig.address}</span>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <h3 className="font-semibold text-foreground mb-4">{t("legal")}</h3>
+              <ul className="space-y-3 w-full">
+
+                <li>
+                  <Link
+                    href="/privacy"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t("privacy")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/terms"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t("terms")}
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          {/* Bottom */}
+          <div className="pt-8 border-t border-border">
+            <p className="text-center text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Burxonov Anvar Lazizovich. {t("copyright")}
             </p>
-            <div className="flex items-center gap-6">
-              <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Terms of Service
-              </Link>
-            </div>
           </div>
         </div>
       </div>

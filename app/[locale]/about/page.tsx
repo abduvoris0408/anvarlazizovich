@@ -4,7 +4,9 @@ import { Footer } from "@/components/shared/footer"
 import { AboutHero } from "@/components/about/about-hero"
 import { Biography } from "@/components/about/biography"
 import { Education } from "@/components/about/education"
+
 import { Experience } from "@/components/about/experience"
+import { Skills } from "@/components/about/skills"
 import { Values } from "@/components/about/values"
 
 export const metadata: Metadata = {
@@ -32,8 +34,10 @@ export default function AboutPage() {
       <main className="relative z-10">
         <AboutHero />
         <Biography />
+
         <Education />
         <Experience />
+        <Skills />
         <Values />
       </main>
 

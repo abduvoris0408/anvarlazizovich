@@ -1,14 +1,24 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
-import { siteConfig } from "@/data/site"
+import type { About } from "@/lib/types"
 
 export function PracticeCTA() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [about, setAbout] = useState<About | null>(null)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+  }, [])
+
+  const phone = about?.phone || "+998 90 123 45 67"
 
   return (
     <section className="py-24">
@@ -59,11 +69,11 @@ export function PracticeCTA() {
                 </Link>
 
                 <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="inline-flex items-center gap-2 px-6 py-4 text-foreground hover:text-primary transition-colors"
                 >
                   <Phone className="h-5 w-5" />
-                  <span className="font-medium">{siteConfig.phone}</span>
+                  <span className="font-medium">{phone}</span>
                 </a>
               </motion.div>
             </div>

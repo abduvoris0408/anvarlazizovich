@@ -4,7 +4,6 @@ import type React from "react"
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { mediationData } from "@/data/mediation"
 import { Clock, Wallet, Lock, Heart, Target, Settings } from "lucide-react"
 
 const iconMap: Record<string, React.ElementType> = {
@@ -15,6 +14,15 @@ const iconMap: Record<string, React.ElementType> = {
   Target,
   Settings,
 }
+
+const benefits = [
+  { title: "Tezlik", description: "Mediatsiya jarayoni odatda bir necha kundan bir necha haftagacha davom etadi, sud jarayonlari esa oylab cho'zilishi mumkin.", icon: "Clock" },
+  { title: "Tejamkorlik", description: "Mediatsiya xarajatlari sud xarajatlariga nisbatan ancha kam. Siz vaqt va pul tejaysiz.", icon: "Wallet" },
+  { title: "Maxfiylik", description: "Sud jarayonlaridan farqli o'laroq, mediatsiya maxfiy o'tkaziladi. Sizning ishingiz ommaviy bo'lmaydi.", icon: "Lock" },
+  { title: "Munosabatlarni saqlash", description: "Mediatsiya tomonlar o'rtasidagi munosabatlarni saqlashga yordam beradi.", icon: "Heart" },
+  { title: "Nazorat", description: "Tomonlar jarayon va natija ustidan to'liq nazoratga ega. Qaror ular tomonidan qabul qilinadi.", icon: "Target" },
+  { title: "Moslashuvchanlik", description: "Mediatsiya jarayoni tomonlarning ehtiyojlariga moslashtirilishi mumkin.", icon: "Settings" },
+]
 
 export function MediationBenefits() {
   const ref = useRef(null)
@@ -43,7 +51,7 @@ export function MediationBenefits() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mediationData.benefits.map((benefit, index) => {
+            {benefits.map((benefit, index) => {
               const IconComponent = iconMap[benefit.icon] || Clock
               return (
                 <motion.div

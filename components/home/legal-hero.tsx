@@ -5,24 +5,38 @@ import { useState, useEffect } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Scale, ArrowRight, Phone } from "lucide-react"
 import Link from "next/link"
-import { siteConfig } from "@/data/site"
+import type { About, Achievement } from "@/lib/types"
 
 export function LegalHero() {
   const [mounted, setMounted] = useState(false)
+  const [about, setAbout] = useState<About | null>(null)
+  const [achievements, setAchievements] = useState<Achievement[]>([])
 
   useEffect(() => {
     setMounted(true)
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/achievements?limit=100")
+      .then((r) => r.json())
+      .then((d) => d.data && setAchievements(d.data))
+      .catch(() => { })
   }, [])
 
   if (!mounted) {
     return null
   }
 
+  const name = about?.fullName || "Burxonov Anvar Lazizovich"
+  const title = about?.title || "Lawyer & Certified Mediator"
+  const phone = about?.phone || "+998 90 123 45 67"
+
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col">
       <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col">
         <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">
-          {/* Badge - Updated to English */}
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -35,7 +49,7 @@ export function LegalHero() {
             </Badge>
           </motion.div>
 
-          {/* Main Heading - Updated to English */}
+          {/* Main Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,20 +57,24 @@ export function LegalHero() {
             className="mb-8"
           >
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance">
-              <span className="block">{siteConfig.name}</span>
-              <span className="block mt-2 text-primary">{siteConfig.title}</span>
+              <span className="block">{name}</span>
+              <span className="block mt-2 text-primary">{title}</span>
             </h1>
           </motion.div>
 
-          {/* Description - Updated to English */}
+
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground text-pretty"
           >
-            {siteConfig.experience} — Your trusted partner for professional protection of your rights and effective
-            dispute resolution through expert legal representation and certified mediation.
+            {about?.bio
+              ? about.bio.slice(0, 200) + "..."
+              : about?.biography
+                ? about.biography.slice(0, 200) + "..."
+                : "Your trusted partner for professional protection of your rights and effective dispute resolution through expert legal representation and certified mediation."}
           </motion.p>
 
           <motion.div
@@ -65,7 +83,7 @@ export function LegalHero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            {/* Primary CTA - Updated to English */}
+            {/* Primary CTA */}
             <Link href="/contact">
               <div className="group cursor-pointer border border-border bg-card gap-2 h-[60px] flex items-center p-[10px] rounded-full">
                 <div className="border border-border bg-primary h-[40px] rounded-full flex items-center justify-center text-primary-foreground">
@@ -82,16 +100,16 @@ export function LegalHero() {
 
             {/* Secondary CTA */}
             <a
-              href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+              href={`tel:${phone.replace(/\s/g, "")}`}
               className="flex items-center gap-2 px-6 py-3 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Phone className="h-5 w-5" />
-              <span className="font-medium">{siteConfig.phone}</span>
+              <span className="font-medium">{phone}</span>
             </a>
           </motion.div>
         </div>
 
-        {/* Trust Indicators - Updated to English */}
+        {/* Trust Indicators */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,22 +118,33 @@ export function LegalHero() {
         >
           <div className="text-center">
             <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16">
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-foreground">15+</p>
-                <p className="text-sm text-muted-foreground">Years Experience</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-foreground">500+</p>
-                <p className="text-sm text-muted-foreground">Successful Cases</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-foreground">1000+</p>
-                <p className="text-sm text-muted-foreground">Satisfied Clients</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-foreground">98%</p>
-                <p className="text-sm text-muted-foreground">Success Rate</p>
-              </div>
+              {achievements.length > 0 ? (
+                achievements.map((ach) => (
+                  <div key={ach.id} className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">{ach.value}</p>
+                    <p className="text-sm text-muted-foreground">{ach.title}</p>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">15+</p>
+                    <p className="text-sm text-muted-foreground">Years Experience</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">500+</p>
+                    <p className="text-sm text-muted-foreground">Successful Cases</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">1000+</p>
+                    <p className="text-sm text-muted-foreground">Satisfied Clients</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">98%</p>
+                    <p className="text-sm text-muted-foreground">Success Rate</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </motion.div>

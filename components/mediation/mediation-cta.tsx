@@ -1,14 +1,24 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Award, Phone } from "lucide-react"
-import { siteConfig } from "@/data/site"
+import type { About } from "@/lib/types"
 
 export function MediationCTA() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const [about, setAbout] = useState<About | null>(null)
+
+  useEffect(() => {
+    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+      .then((r) => r.json())
+      .then((d) => d.data && setAbout(d.data))
+      .catch(() => { })
+  }, [])
+
+  const phone = about?.phone || "+998 90 123 45 67"
 
   return (
     <section className="py-24">
@@ -41,7 +51,7 @@ export function MediationCTA() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
               >
-                Nizoni tinch yo'l bilan hal qilishni xohlaysizmi?
+                Nizoni tinch yo&apos;l bilan hal qilishni xohlaysizmi?
               </motion.h2>
 
               <motion.p
@@ -63,16 +73,16 @@ export function MediationCTA() {
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 group"
                 >
-                  Mediatsiya bo'yicha murojaat qilish
+                  Mediatsiya bo&apos;yicha murojaat qilish
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="inline-flex items-center gap-2 px-6 py-4 text-foreground hover:text-primary transition-colors"
                 >
                   <Phone className="h-5 w-5" />
-                  <span className="font-medium">{siteConfig.phone}</span>
+                  <span className="font-medium">{phone}</span>
                 </a>
               </motion.div>
             </div>
