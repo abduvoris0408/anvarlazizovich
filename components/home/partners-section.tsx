@@ -4,10 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import type { Partner } from "@/lib/types"
-
-
-
-import { SpinnerCustom } from "@/components/ui/spinner"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export function PartnersSection() {
     const [partners, setPartners] = useState<Partner[]>([])
@@ -24,25 +21,33 @@ export function PartnersSection() {
             .finally(() => setIsLoading(false))
     }, [])
 
-    if (!isLoading && partners.length === 0) {
+    if (isLoading) {
         return (
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-                        <h2 className="text-xl font-semibold text-muted-foreground">{t("title")}</h2>
-                        <p className="mt-2 text-muted-foreground">Ma'lumotlar hozircha mavjud emas.</p>
+                    <div className="glass-effect rounded-[2rem] p-8 md:p-12">
+                        <div className="text-center mb-10">
+                            <Skeleton className="h-8 w-48 rounded-lg mx-auto mb-3" />
+                            <Skeleton className="h-5 w-64 rounded-lg mx-auto" />
+                        </div>
+                        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                <Skeleton key={i} className="h-12 md:h-16 w-24 md:w-32 rounded-lg" />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
         )
     }
 
-    if (isLoading) {
+    if (partners.length === 0) {
         return (
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <div className="flex justify-center items-center h-48">
-                        <SpinnerCustom />
+                    <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
+                        <h2 className="text-xl font-semibold text-muted-foreground">{t("title")}</h2>
+                        <p className="mt-2 text-muted-foreground">Ma'lumotlar hozircha mavjud emas.</p>
                     </div>
                 </div>
             </section>

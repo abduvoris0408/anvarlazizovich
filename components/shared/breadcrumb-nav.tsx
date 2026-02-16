@@ -27,14 +27,19 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
   // Generate breadcrumb items from pathname if not provided
   const breadcrumbItems = items || generateBreadcrumbs(pathname, t)
 
+  // Show breadcrumbs only if not on home page
+  if (pathname === '/' || breadcrumbItems.length === 0) {
+    return null
+  }
+
   return (
-    <div className="border-b border-border bg-muted/30 dark:bg-muted/20">
-      <div className="container mx-auto px-4 py-3">
+    <div className="sticky top-[60px] z-[9998] border-b border-border bg-background/95 backdrop-blur-md dark:bg-background/90">
+      <div className="container mx-auto px-4 py-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/" className="hover:text-foreground">
+                <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {t('home')}
                 </Link>
               </BreadcrumbLink>
@@ -43,17 +48,17 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
             {breadcrumbItems.map((item, index) => (
               <div key={`breadcrumb-${index}`} className="flex items-center gap-1.5">
                 <BreadcrumbSeparator>
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   {item.href ? (
                     <BreadcrumbLink asChild>
-                      <Link href={item.href} className="hover:text-foreground">
+                      <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                         {item.label}
                       </Link>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                    <BreadcrumbPage className="text-sm text-foreground">{item.label}</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
               </div>

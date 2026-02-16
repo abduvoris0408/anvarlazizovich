@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import type { Service } from "@/lib/types"
 import { Scale, Shield, Heart, Briefcase, Building, ArrowRight } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const iconMap: Record<string, React.ElementType> = {
   Scale,
@@ -20,13 +21,38 @@ export function PracticePreview() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [services, setServices] = useState<Service[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/services?limit=100")
       .then((r) => r.json())
       .then((d) => d.data && setServices(d.data))
       .catch(() => { })
+      .finally(() => setIsLoading(false))
   }, [])
+
+  if (isLoading) {
+    return (
+      <section className="relative overflow-hidden py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Skeleton className="h-8 w-40 rounded-full mx-auto mb-6" />
+            <Skeleton className="h-10 w-64 rounded-lg mx-auto mb-4" />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="p-6 rounded-2xl border border-border bg-card/50 space-y-4">
+                <Skeleton className="h-10 w-10 rounded-lg" />
+                <Skeleton className="h-6 w-full rounded-lg" />
+                <Skeleton className="h-4 w-full rounded-lg" />
+                <Skeleton className="h-4 w-3/4 rounded-lg" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   if (services.length === 0) return null
 
@@ -48,13 +74,13 @@ export function PracticePreview() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/30 border border-border backdrop-blur-sm mb-6"
           >
             <Scale className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground/80">Amaliyot sohalari</span>
+            <span className="text-sm font-medium text-foreground">Amaliyot sohalari</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             Huquqiy xizmatlar
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

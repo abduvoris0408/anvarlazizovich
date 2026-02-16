@@ -6,26 +6,77 @@ import { Badge } from "@/components/ui/badge"
 import { Scale, ArrowRight, Phone } from "lucide-react"
 import Link from "next/link"
 import type { About, Achievement } from "@/lib/types"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export function LegalHero() {
   const [mounted, setMounted] = useState(false)
   const [about, setAbout] = useState<About | null>(null)
   const [achievements, setAchievements] = useState<Achievement[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setMounted(true)
-    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
-      .then((r) => r.json())
-      .then((d) => d.data && setAbout(d.data))
-      .catch(() => { })
-    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/achievements?limit=100")
-      .then((r) => r.json())
-      .then((d) => d.data && setAchievements(d.data))
-      .catch(() => { })
+    Promise.all([
+      fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
+        .then((r) => r.json())
+        .then((d) => d.data && setAbout(d.data))
+        .catch(() => { }),
+      fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/achievements?limit=100")
+        .then((r) => r.json())
+        .then((d) => d.data && setAchievements(d.data))
+        .catch(() => { }),
+    ]).finally(() => setIsLoading(false))
   }, [])
 
   if (!mounted) {
     return null
+  }
+
+  // Loading state with skeleton
+  if (isLoading) {
+    return (
+      <section className="relative overflow-hidden min-h-screen flex flex-col">
+        <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col">
+          <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">
+            {/* Badge Skeleton */}
+            <div className="mb-8">
+              <Skeleton className="h-8 w-48 rounded-full mx-auto" />
+            </div>
+
+            {/* Heading Skeleton */}
+            <div className="mb-8 space-y-3">
+              <Skeleton className="h-14 w-full rounded-lg" />
+              <Skeleton className="h-14 w-5/6 rounded-lg mx-auto" />
+            </div>
+
+            {/* Description Skeleton */}
+            <div className="mx-auto mb-12 max-w-2xl space-y-3">
+              <Skeleton className="h-4 w-full rounded-lg" />
+              <Skeleton className="h-4 w-full rounded-lg" />
+              <Skeleton className="h-4 w-3/4 rounded-lg" />
+            </div>
+
+            {/* CTA Skeleton */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Skeleton className="h-14 w-48 rounded-full" />
+              <Skeleton className="h-12 w-40 rounded-lg" />
+            </div>
+
+            {/* Trust Indicators Skeleton */}
+            <div className="mt-auto pb-8">
+              <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="text-center space-y-2">
+                    <Skeleton className="h-10 w-16 mx-auto rounded-lg" />
+                    <Skeleton className="h-4 w-24 rounded-lg" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   const name = about?.fullName || "Burxonov Anvar Lazizovich"

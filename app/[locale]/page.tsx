@@ -1,6 +1,7 @@
 
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { LegalHero } from "@/components/home/legal-hero"
 import { PartnersSection } from "@/components/home/partners-section"
 import { PracticePreview } from "@/components/home/practice-preview"
@@ -22,7 +23,7 @@ export default function Home() {
       />
 
       <Header />
-
+      <BreadcrumbNav />
 
       <main className="relative z-10">
         <LegalHero />
