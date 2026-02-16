@@ -4,12 +4,14 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Award, Phone } from "lucide-react"
+import { useTranslations } from "next-intl"
 import type { About } from "@/lib/types"
 
 export function MediationCTA() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [about, setAbout] = useState<About | null>(null)
+  const t = useTranslations("mediation")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
@@ -39,19 +41,19 @@ export function MediationCTA() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/30 border border-border backdrop-blur-sm mb-6"
               >
                 <Award className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground/80">Sertifikatlangan Mediator</span>
+                <span className="text-sm font-medium text-foreground">{t("badge")}</span>
               </motion.div>
 
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
+                className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance"
               >
-                Nizoni tinch yo&apos;l bilan hal qilishni xohlaysizmi?
+                {t("ctaTitle")}
               </motion.h2>
 
               <motion.p
@@ -60,7 +62,7 @@ export function MediationCTA() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto"
               >
-                Mediatsiya orqali vaqt, pul tejang va munosabatlaringizni saqlang. Birinchi konsultatsiya bepul.
+                {t("ctaSubtitle")}
               </motion.p>
 
               <motion.div
@@ -73,7 +75,7 @@ export function MediationCTA() {
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 group"
                 >
-                  Mediatsiya bo&apos;yicha murojaat qilish
+                  {t("ctaBtn")}
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 

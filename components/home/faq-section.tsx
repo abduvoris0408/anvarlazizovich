@@ -4,8 +4,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Plus, Minus } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 import type { FAQ } from "@/lib/types"
-
 
 export function FAQSection() {
     const [faqs, setFaqs] = useState<FAQ[]>([])
@@ -23,27 +23,31 @@ export function FAQSection() {
             .finally(() => setIsLoading(false))
     }, [])
 
-    if (!isLoading && faqs.length === 0) {
+    if (isLoading) {
         return (
             <section className="py-20">
                 <div className="container mx-auto px-4">
-                    <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-                        <h2 className="text-xl font-semibold text-muted-foreground">{t("title")}</h2>
-                        <p className="mt-2 text-muted-foreground">Savol-javoblar hozircha mavjud emas.</p>
+                    <div className="text-center mb-12">
+                        <Skeleton className="h-10 w-48 rounded-lg mx-auto mb-4" />
+                        <Skeleton className="h-6 w-64 rounded-lg mx-auto" />
+                    </div>
+                    <div className="max-w-3xl mx-auto space-y-4">
+                        {[1, 2, 3].map((i) => (
+                            <Skeleton key={i} className="h-16 rounded-2xl" />
+                        ))}
                     </div>
                 </div>
             </section>
         )
     }
 
-    if (isLoading) {
+    if (faqs.length === 0) {
         return (
             <section className="py-20">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-3xl mx-auto space-y-4">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="h-16 glass-card rounded-xl animate-pulse" />
-                        ))}
+                    <div className="glass-card rounded-3xl p-8 text-center max-w-2xl mx-auto">
+                        <h2 className="text-xl font-semibold text-muted-foreground">{t("title")}</h2>
+                        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
                     </div>
                 </div>
             </section>
@@ -70,7 +74,7 @@ export function FAQSection() {
                         >
                             <button
                                 onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                                className="flex items-center justify-between w-full p-6 text-left hover:bg-white/5 transition-colors"
+                                className="flex items-center justify-between w-full p-6 text-left hover:bg-muted/50 dark:hover:bg-muted/30 transition-colors"
                             >
                                 <span className="font-semibold text-foreground text-lg">{faq.question}</span>
                                 {openId === faq.id ? (
