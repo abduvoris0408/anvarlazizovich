@@ -10,6 +10,17 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  webpack: (config, { isServer }) => {
+    config.cache = {
+      type: 'filesystem',
+      buildDependencies: {
+        config: [__filename],
+      },
+      cacheDirectory: '.next/cache/webpack',
+    };
+    
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);
