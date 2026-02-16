@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { Calendar, Clock, ArrowRight, Eye } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import type { BlogPost } from "@/lib/types"
+import { GridSkeleton } from "@/components/ui/skeleton"
 
 export function BlogGrid() {
     const [posts, setPosts] = useState<BlogPost[]>([])
@@ -26,17 +27,7 @@ export function BlogGrid() {
 
 
     if (loading) {
-        return (
-            <section className="py-16">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-2 max-w-6xl mx-auto lg:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="animate-pulse glass-card rounded-2xl h-96" />
-                        ))}
-                    </div>
-                </div>
-            </section>
-        )
+        return <GridSkeleton count={3} variant="blog" />
     }
 
     if (posts.length === 0) {

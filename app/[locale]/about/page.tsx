@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { AboutHero } from "@/components/about/about-hero"
 import { Biography } from "@/components/about/biography"
 import { Education } from "@/components/about/education"
@@ -30,6 +31,7 @@ export default function AboutPage() {
       />
 
       <Header />
+      <BreadcrumbNav items={[{ label: "About", href: "/about" }]} />
 
       <main className="relative z-10">
         <AboutHero />

@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import type { Service } from "@/lib/types"
 import { Scale, Shield, Heart, Briefcase, Building, Check } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const iconMap: Record<string, React.ElementType> = {
   Scale,
@@ -19,20 +20,51 @@ export function PracticeGrid() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [services, setServices] = useState<Service[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/services?limit=100")
       .then((r) => r.json())
       .then((d) => d.data && setServices(d.data))
       .catch(() => { })
+      .finally(() => setIsLoading(false))
   }, [])
+
+  if (isLoading) {
+    return (
+      <section className="py-16">
+        <motion.div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="p-8 rounded-2xl border border-border bg-card/50 space-y-4">
+                  <div className="flex items-start gap-6">
+                    <Skeleton className="h-16 w-16 rounded-2xl flex-shrink-0" />
+                    <div className="flex-1 space-y-3 w-full">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                    </div>
+                  </div>
+                  <div className="space-y-2 pl-22">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-5/6" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </section>
+    )
+  }
 
   if (services.length === 0) {
     return (
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto text-center text-muted-foreground">
-            <p>Xizmatlar haqida ma&apos;lumot yuklanmoqda...</p>
+            <p>Xizmatlar haqida ma&apos;lumot yo&apos;q</p>
           </div>
         </div>
       </section>
@@ -59,7 +91,7 @@ export function PracticeGrid() {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="group relative p-8 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm hover:border-primary/30 transition-all duration-300"
+                  className="group relative p-8 rounded-2xl border border-border bg-card/50 dark:bg-card/30 backdrop-blur-sm hover:border-primary/50 dark:hover:border-primary/40 transition-all duration-300"
                 >
                   <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
 

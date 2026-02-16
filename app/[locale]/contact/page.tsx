@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
@@ -25,6 +26,7 @@ export default function ContactPage() {
       />
 
       <Header />
+      <BreadcrumbNav items={[{ label: "Contact", href: "/contact" }]} />
 
       <main className="relative z-10 flex-grow">
         <ContactHero />

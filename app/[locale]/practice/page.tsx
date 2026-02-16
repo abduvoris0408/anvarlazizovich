@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { PracticeHero } from "@/components/practice/practice-hero"
 import { PracticeGrid } from "@/components/practice/practice-grid"
 import { PracticeCTA } from "@/components/practice/practice-cta"
@@ -26,6 +27,7 @@ export default function PracticePage() {
       />
 
       <Header />
+      <BreadcrumbNav items={[{ label: "Practice", href: "/practice" }]} />
 
       <main className="relative z-10">
         <PracticeHero />

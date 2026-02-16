@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { MediationHero } from "@/components/mediation/mediation-hero"
 import { WhatIsMediation } from "@/components/mediation/what-is-mediation"
 import { MediationBenefits } from "@/components/mediation/mediation-benefits"
@@ -29,6 +30,7 @@ export default function MediationPage() {
       />
 
       <Header />
+      <BreadcrumbNav items={[{ label: "Mediation", href: "/mediation" }]} />
 
       <main className="relative z-10">
         <MediationHero />

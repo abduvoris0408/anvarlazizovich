@@ -5,16 +5,15 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import type { News } from "@/lib/types"
 import { ArrowRight, Calendar, Clock } from "lucide-react"
-
-
-
-import { SpinnerCustom } from "@/components/ui/spinner"
+import { GridSkeleton } from "@/components/ui/skeleton"
+import { useTranslations } from "next-intl"
 
 export function NewsGrid() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [articles, setArticles] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const t = useTranslations("articles")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=100")
@@ -26,24 +25,16 @@ export function NewsGrid() {
       .finally(() => setIsLoading(false))
   }, [])
 
-  if (!isLoading && articles.length === 0) {
+  if (isLoading) {
+    return <GridSkeleton count={3} variant="article" />
+  }
+
+  if (articles.length === 0) {
     return (
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-            <p className="text-muted-foreground">Yangiliklar hozircha mavjud emas.</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center h-96">
-            <SpinnerCustom />
+            <p className="text-muted-foreground">{t("noData")}</p>
           </div>
         </div>
       </section>

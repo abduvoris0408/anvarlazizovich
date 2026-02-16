@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { NewsHero } from "@/components/news/news-hero"
 import { NewsGrid } from "@/components/news/news-grid"
 
@@ -24,6 +25,7 @@ export default function NewsPage() {
       />
 
       <Header />
+      <BreadcrumbNav items={[{ label: "News", href: "/news" }]} />
 
       <main className="relative z-10">
         <NewsHero />

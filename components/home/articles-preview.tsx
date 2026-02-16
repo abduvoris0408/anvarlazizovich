@@ -5,18 +5,46 @@ import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import type { News } from "@/lib/types"
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export function ArticlesPreview() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [articles, setArticles] = useState<News[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=3")
       .then((r) => r.json())
       .then((d) => d.data && setArticles(d.data))
       .catch(() => { })
+      .finally(() => setIsLoading(false))
   }, [])
+
+  if (isLoading) {
+    return (
+      <section className="relative overflow-hidden py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Skeleton className="h-10 w-48 rounded-full mx-auto mb-6" />
+            <Skeleton className="h-12 w-64 rounded-lg mx-auto mb-4" />
+            <Skeleton className="h-6 w-80 rounded-lg mx-auto" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-2xl p-6 border border-border bg-card space-y-4">
+                <Skeleton className="h-8 w-24" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-5/6" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   if (articles.length === 0) return null
 
@@ -35,13 +63,13 @@ export function ArticlesPreview() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/30 border border-border backdrop-blur-sm mb-6"
           >
             <BookOpen className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground/80">Yangiliklar va maqolalar</span>
+            <span className="text-sm font-medium text-foreground">Yangiliklar va maqolalar</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             So&apos;nggi maqolalar
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -61,8 +89,8 @@ export function ArticlesPreview() {
             >
               <Link href={`/news/${article.slug || article.id}`}>
 
-                <div className="relative rounded-2xl p-6 backdrop-blur-sm border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent hover:border-primary/30 transition-all duration-300 h-full">
-                  <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative rounded-2xl p-6 backdrop-blur-sm border border-border bg-card/50 dark:bg-card/30 hover:border-primary/50 dark:hover:border-primary/40 transition-all duration-300 h-full">
+                  <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-primary/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                   <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
                     <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">

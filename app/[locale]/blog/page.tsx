@@ -1,5 +1,6 @@
 import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
+import { BreadcrumbNav } from "@/components/shared/breadcrumb-nav"
 import { BlogGrid } from "@/components/blog/blog-grid"
 import { motion } from "framer-motion"
 
@@ -13,6 +14,7 @@ export default function BlogPage() {
                 }}
             />
             <Header />
+            <BreadcrumbNav items={[{ label: "Blog", href: "/blog" }]} />
             <main className="relative z-10">
                 <section className="pt-24 pb-8">
                     <div className="container mx-auto px-4 text-center">
