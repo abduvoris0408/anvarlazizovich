@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import type { About } from "@/lib/types"
 import { Briefcase } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 
 interface ExperienceItem {
@@ -82,10 +83,7 @@ export function Experience() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
-              <Briefcase className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground/80">Tajriba</span>
-            </div>
+            <SectionBadge title="Tajriba" icon={Briefcase} />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ish tajribasi</h2>
           </motion.div>
 
@@ -108,7 +106,7 @@ export function Experience() {
 
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-2xl glass-card"
+                    className="p-6 rounded-2xl border bg-card text-card-foreground shadow-sm cursor-pointer"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                       <div>

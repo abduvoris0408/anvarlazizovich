@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import type { Skill } from "@/lib/types"
+import { Cpu } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 
 export function Skills() {
@@ -67,6 +69,7 @@ export function Skills() {
                     viewport={{ once: true }}
                     className="glass-effect rounded-[2rem] p-8 md:p-12 max-w-4xl mx-auto"
                 >
+                    <SectionBadge title="Ko'nikmalar" icon={Cpu} className="mb-8" />
                     <h2 className="text-3xl font-bold text-foreground mb-10 text-center">{t("title")}</h2>
 
                     <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">

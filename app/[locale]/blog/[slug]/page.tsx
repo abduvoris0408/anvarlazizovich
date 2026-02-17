@@ -2,6 +2,7 @@ import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
 import { BlogContent } from "@/components/blog/blog-content"
 import { notFound } from "next/navigation"
+import { CommentsSection } from "@/components/shared/comments-section"
 
 const BASE_URL = "https://portfolio-backend-rh0y.onrender.com/api/v1"
 
@@ -28,8 +29,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return (
         <div className="min-h-screen w-full relative bg-background">
             <Header />
-            <main className="relative z-10">
+            <main className="relative z-10 pb-20">
                 <BlogContent post={post} />
+                <div className="container mx-auto px-4 max-w-4xl">
+                    <CommentsSection blogPostId={post.id} />
+                </div>
             </main>
             <Footer />
         </div>

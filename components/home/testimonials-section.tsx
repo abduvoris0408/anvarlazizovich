@@ -3,36 +3,52 @@
 import { useState, useEffect } from "react"
 import { Marquee } from "@/components/magicui/marquee"
 import type { Testimonial } from "@/lib/types"
+import { Star, User } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const TestimonialCard = ({
-  image,
-  name,
-  role,
-  content,
+  testimonial,
 }: {
-  image: string
-  name: string
-  role: string
-  content: string
+  testimonial: Testimonial
 }) => {
+  const image = testimonial.image?.url || testimonial.clientImage?.url
+  const name = testimonial.name || testimonial.clientName
+  const role = testimonial.role || testimonial.clientPosition || "Mijoz"
+  const rating = testimonial.rating || 5
+
   return (
-    <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 bg-white/5 dark:bg-gradient-to-b dark:from-white/5 dark:to-white/[0.02] p-10 shadow-lg">
-      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-primary/5 dark:bg-primary/10 blur-md"></div>
-
-      <div className="text-foreground/90 leading-relaxed">{content}</div>
-
-      <div className="mt-5 flex items-center gap-2">
-        <img
-          src={image || "/placeholder.svg"}
-          alt={name}
-          height="40"
-          width="40"
-          className="h-10 w-10 rounded-full object-cover"
-        />
-        <div className="flex flex-col">
-          <div className="leading-5 font-medium tracking-tight text-foreground">{name}</div>
-          <div className="leading-5 tracking-tight text-muted-foreground">{role}</div>
+    <div className="relative w-full max-w-sm overflow-hidden rounded-3xl glass-liquid p-8 hover:bg-white/10 transition-colors duration-300">
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="relative h-12 w-12 overflow-hidden rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center">
+            {image ? (
+              <img
+                src={image}
+                alt={name}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <User className="h-6 w-6 text-primary/60" />
+            )}
+          </div>
+          <div>
+            <div className="font-semibold text-foreground leading-tight">{name}</div>
+            <div className="text-sm text-muted-foreground">{role}</div>
+          </div>
         </div>
+        <div className="flex gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              className={`h-4 w-4 ${i < rating ? "fill-primary text-primary" : "fill-muted text-muted"
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="text-foreground/90 leading-relaxed text-base italic">
+        &ldquo;{testimonial.content}&rdquo;
       </div>
     </div>
   )
@@ -84,74 +100,52 @@ export function TestimonialsSection() {
   const thirdColumn = testimonials.slice(colSize * 2)
 
   return (
-    <section className="mb-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-[540px]">
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="group relative z-[60] mx-auto rounded-full border border-white/20 bg-white/5 px-6 py-1 text-xs backdrop-blur transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-100 md:text-sm"
-            >
-              <div className="absolute inset-x-0 -top-px mx-auto h-0.5 w-1/2 bg-gradient-to-r from-transparent via-primary to-transparent shadow-2xl transition-all duration-500 group-hover:w-3/4"></div>
-              <div className="absolute inset-x-0 -bottom-px mx-auto h-0.5 w-1/2 bg-gradient-to-r from-transparent via-primary to-transparent shadow-2xl transition-all duration-500 group-hover:h-px"></div>
-              <span className="relative text-foreground">Mijozlar fikri</span>
-            </button>
-          </div>
-          <h2 className="from-foreground/60 via-foreground to-foreground/60 dark:from-muted-foreground/55 dark:via-foreground dark:to-muted-foreground/55 mt-5 bg-gradient-to-r bg-clip-text text-center text-4xl font-semibold tracking-tighter text-transparent md:text-[54px] md:leading-[60px] relative z-10">
-            Mijozlarimiz fikri
+    <section className="mb-24 relative">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mx-auto max-w-[640px] text-center mb-16">
+          <SectionBadge title="Mijozlar fikri" icon={User} />
+
+          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">
+            Mijozlarimiz nima deydi?
           </h2>
 
-          <p className="mt-5 relative z-10 text-center text-lg text-muted-foreground">
-            Professional huquqiy xizmatlardan foydalangan mijozlarimizning sharhlari
+          <p className="text-lg text-muted-foreground">
+            Bizning xizmatlarimizdan foydalangan va natijadan mamnun bo&apos;lgan mijozlarimizning samimiy fikrlari bilan tanishing.
           </p>
         </div>
 
-        <div className="my-16 flex max-h-[738px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
-          <div>
-            <Marquee pauseOnHover vertical className="[--duration:20s]">
-              {firstColumn.map((t) => (
-                <TestimonialCard
-                  key={t.id}
-                  image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
-                  name={t.name || t.clientName}
-                  role={t.role || t.clientPosition}
-                  content={t.content}
-                />
-              ))}
-            </Marquee>
+        <div className="relative flex h-[600px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-transparent">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full h-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+            <div className="h-full overflow-hidden">
+              <Marquee pauseOnHover vertical className="[--duration:40s]">
+                {firstColumn.map((t) => (
+                  <TestimonialCard key={t.id} testimonial={t} />
+                ))}
+              </Marquee>
+            </div>
+
+            <div className="h-full overflow-hidden hidden md:block">
+              <Marquee reverse pauseOnHover vertical className="[--duration:45s]">
+                {secondColumn.map((t) => (
+                  <TestimonialCard key={t.id} testimonial={t} />
+                ))}
+              </Marquee>
+            </div>
+
+            <div className="h-full overflow-hidden hidden lg:block">
+              <Marquee pauseOnHover vertical className="[--duration:50s]">
+                {thirdColumn.map((t) => (
+                  <TestimonialCard key={t.id} testimonial={t} />
+                ))}
+              </Marquee>
+            </div>
           </div>
 
-          {secondColumn.length > 0 && (
-            <div className="hidden md:block">
-              <Marquee reverse pauseOnHover vertical className="[--duration:25s]">
-                {secondColumn.map((t) => (
-                  <TestimonialCard
-                    key={t.id}
-                    image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
-                    name={t.name || t.clientName}
-                    role={t.role || t.clientPosition}
-                    content={t.content}
-                  />
-                ))}
-              </Marquee>
-            </div>
-          )}
-
-          {thirdColumn.length > 0 && (
-            <div className="hidden lg:block">
-              <Marquee pauseOnHover vertical className="[--duration:30s]">
-                {thirdColumn.map((t) => (
-                  <TestimonialCard
-                    key={t.id}
-                    image={t.image?.url || t.clientImage?.url || "/placeholder.svg"}
-                    name={t.name || t.clientName}
-                    role={t.role || t.clientPosition}
-                    content={t.content}
-                  />
-                ))}
-              </Marquee>
-            </div>
-          )}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background"></div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background"></div>
         </div>
       </div>
     </section>

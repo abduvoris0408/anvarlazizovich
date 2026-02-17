@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Award, Phone } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 import type { About } from "@/lib/types"
 
 export function MediationCTA() {
@@ -39,10 +40,8 @@ export function MediationCTA() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
               >
-                <Award className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground/80">Sertifikatlangan Mediator</span>
+                <SectionBadge title="Sertifikatlangan Mediator" icon={Award} />
               </motion.div>
 
               <motion.h2

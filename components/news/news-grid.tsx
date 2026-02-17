@@ -4,7 +4,8 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import type { News } from "@/lib/types"
-import { ArrowRight, Calendar, Clock } from "lucide-react"
+import { formatDate } from "@/lib/utils"
+import { ArrowRight, Calendar, Clock, BookOpen } from "lucide-react"
 
 
 
@@ -12,7 +13,7 @@ import { SpinnerCustom } from "@/components/ui/spinner"
 
 export function NewsGrid() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [articles, setArticles] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -20,9 +21,10 @@ export function NewsGrid() {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=100")
       .then((r) => r.json())
       .then((d) => {
+        console.log("NewsGrid Data:", d)
         if (d.data) setArticles(d.data)
       })
-      .catch(() => { })
+      .catch((e) => console.error("NewsGrid Error:", e))
       .finally(() => setIsLoading(false))
   }, [])
 
@@ -54,8 +56,10 @@ export function NewsGrid() {
     <section className="py-16">
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4"
       >
@@ -65,22 +69,38 @@ export function NewsGrid() {
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
                 className="group"
               >
 
                 <Link href={`/news/${article.slug || article.id}`}>
-                  <div className="relative rounded-2xl p-6 glass-card h-full">
+                  <div className="relative rounded-2xl p-6 glass-card h-full flex flex-col">
+                    {/* Image Container */}
+                    <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-muted/20">
+                      {article.image?.url ? (
+                        <img
+                          src={article.image.url}
+                          alt={article.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
+                          <BookOpen className="w-12 h-12 text-primary/20" />
+                        </div>
+                      )}
+                    </div>
 
                     <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
                       <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
                         {article.category?.name}
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1" suppressHydrationWarning>
                         <Calendar className="h-3 w-3" />
-                        {new Date(article.publishedAt || article.createdAt).toLocaleDateString("uz-UZ")}
+                        {formatDate(article.publishedAt || article.createdAt)}
                       </span>
                       {article.readTime && (
                         <span className="flex items-center gap-1">

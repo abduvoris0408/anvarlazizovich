@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
-import { Plus, Minus } from "lucide-react"
+import { Plus, Minus, HelpCircle } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 import type { FAQ } from "@/lib/types"
 
 
@@ -54,6 +55,7 @@ export function FAQSection() {
         <section className="py-20">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
+                    <SectionBadge title="F.A.Q" icon={HelpCircle} />
                     <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t("title")}</h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto">{t("subtitle")}</p>
                 </div>

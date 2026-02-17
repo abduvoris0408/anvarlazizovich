@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import type { Education as EducationType } from "@/lib/types"
 import { GraduationCap, Award } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 export function Education() {
   const ref = useRef(null)
@@ -35,11 +36,7 @@ export function Education() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6">
-              <GraduationCap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground/80">Ta&apos;lim</span>
-            </div>
+            <SectionBadge title="Ta'lim" icon={GraduationCap} />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ta&apos;lim va sertifikatlar</h2>
           </motion.div>
 
@@ -52,7 +49,7 @@ export function Education() {
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
 
-                className="flex items-start gap-4 p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm"
+                className="flex items-start gap-4 p-6 rounded-2xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all"
               >
                 <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
                   {edu.degree.toLowerCase().includes("sertifikat") ? (

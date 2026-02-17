@@ -5,6 +5,7 @@ import type React from "react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Clock, Wallet, Lock, Heart, Target, Settings } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const iconMap: Record<string, React.ElementType> = {
   Clock,
@@ -44,6 +45,7 @@ export function MediationBenefits() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
+            <SectionBadge title="Afzalliklar" icon={Target} />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Mediatsiyaning afzalliklari</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Nima uchun mediatsiya sud jarayonlariga nisbatan samaraliroq bo'lishi mumkin?
@@ -60,7 +62,7 @@ export function MediationBenefits() {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="p-6 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+                  className="p-6 rounded-2xl glass-liquid transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                 >
                   <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 w-fit mb-4">
                     <IconComponent className="h-6 w-6 text-primary" />

@@ -3,6 +3,8 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import type { About } from "@/lib/types"
+import { User } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 
 export function Biography() {
@@ -104,6 +106,7 @@ export function Biography() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="lg:col-span-2"
             >
+              <SectionBadge title="Biografiya" icon={User} className="mb-8 md:mb-10" />
               <h2 className="text-3xl font-bold text-foreground mb-6">Biografiya</h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 {biography ? (

@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { Calendar, Clock, ArrowRight, Eye } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import type { BlogPost } from "@/lib/types"
+import { formatDate } from "@/lib/utils"
 
 export function BlogGrid() {
     const [posts, setPosts] = useState<BlogPost[]>([])
@@ -85,7 +86,7 @@ export function BlogGrid() {
                                         )}
                                         <span className="flex items-center gap-1">
                                             <Calendar className="h-3 w-3" />
-                                            {new Date(post.publishedAt || post.createdAt).toLocaleDateString()}
+                                            {formatDate(post.publishedAt || post.createdAt)}
                                         </span>
                                         {post.readTime > 0 && (
                                             <span className="flex items-center gap-1">

@@ -2,7 +2,8 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Scale, Users } from "lucide-react"
+import { Scale, Users, HelpCircle } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const whatIs = {
   title: "Mediatsiya nima?",
@@ -32,10 +33,8 @@ export function WhatIsMediation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
               >
-                <Scale className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground/80">Asosiy tushunchalar</span>
+                <SectionBadge title="Asosiy tushunchalar" icon={HelpCircle} />
               </motion.div>
 
               <motion.h2
@@ -68,7 +67,7 @@ export function WhatIsMediation() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="relative"
             >
-              <div className="aspect-square rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm p-8 flex items-center justify-center">
+              <div className="aspect-square rounded-3xl border bg-card text-card-foreground shadow-sm p-8 flex items-center justify-center">
                 <div className="text-center">
                   <div className="flex justify-center mb-6">
                     <div className="relative">

@@ -2,6 +2,8 @@ import { Header } from "@/components/shared/header"
 import { Footer } from "@/components/shared/footer"
 import { BlogGrid } from "@/components/blog/blog-grid"
 import { motion } from "framer-motion"
+import { BookOpen } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 export default function BlogPage() {
     return (
@@ -16,6 +18,7 @@ export default function BlogPage() {
             <main className="relative z-10">
                 <section className="pt-24 pb-8">
                     <div className="container mx-auto px-4 text-center">
+                        <SectionBadge title="Blog" icon={BookOpen} />
                         <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Blog</h1>
                     </div>
                 </section>

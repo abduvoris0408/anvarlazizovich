@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { Scale, Phone, ArrowRight } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 import type { About } from "@/lib/types"
 
 export function CTASection() {
@@ -35,7 +36,7 @@ export function CTASection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
 
-            className="p-12 rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm relative overflow-hidden"
+            className="p-12 rounded-3xl border bg-card text-card-foreground shadow-sm relative overflow-hidden"
           >
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>

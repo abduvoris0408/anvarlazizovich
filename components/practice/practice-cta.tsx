@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 import type { About } from "@/lib/types"
 
 export function PracticeCTA() {

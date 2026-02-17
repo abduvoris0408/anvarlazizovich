@@ -19,7 +19,7 @@ export function AboutHero() {
   const title = about?.title || "Lawyer & Certified Mediator"
 
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-12 sm:py-16">
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">

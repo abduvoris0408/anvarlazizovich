@@ -5,6 +5,7 @@ import { Calendar, Clock, Eye, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import type { BlogPost } from "@/lib/types"
+import { formatDate } from "@/lib/utils"
 
 interface BlogContentProps {
     post: BlogPost
@@ -40,11 +41,7 @@ export function BlogContent({ post }: BlogContentProps) {
                             )}
                             <span className="flex items-center gap-2">
                                 <Calendar className="h-4 w-4" />
-                                {new Date(post.publishedAt || post.createdAt).toLocaleDateString("en-US", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                })}
+                                {formatDate(post.publishedAt || post.createdAt)}
                             </span>
                             {post.readTime > 0 && (
                                 <span className="flex items-center gap-2">

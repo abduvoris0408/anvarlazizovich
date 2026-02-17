@@ -2,6 +2,8 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { SectionBadge } from "@/components/ui/section-badge"
+import { GitMerge } from "lucide-react"
 
 const processSteps = [
   { step: 1, title: "Dastlabki konsultatsiya", description: "Tomonlar bilan alohida suhbat va mediatsiya jarayonini tushuntirish." },
@@ -29,6 +31,7 @@ export function MediationProcess() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
+            <SectionBadge title="Jarayon" icon={GitMerge} />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Mediatsiya jarayoni</h2>
             <p className="text-lg text-muted-foreground">Mediatsiya qanday bosqichlardan iborat?</p>
           </motion.div>
@@ -53,7 +56,7 @@ export function MediationProcess() {
 
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm"
+                    className="p-6 rounded-2xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all"
                   >
                     <div className="flex items-center gap-4 mb-3">
                       <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm md:hidden">

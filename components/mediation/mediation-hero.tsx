@@ -1,32 +1,29 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
+import { SectionBadge } from "@/components/ui/section-badge"
 import { Award, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function MediationHero() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section className="relative overflow-hidden py-12 sm:py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-4"
           >
-            <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <Award className="h-4 w-4" />
-              Sertifikatlangan Mediator
-            </Badge>
+            <SectionBadge title="Sertifikatlangan Mediator" icon={Award} />
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4"
           >
             Mediatsiya xizmatlari
           </motion.h1>

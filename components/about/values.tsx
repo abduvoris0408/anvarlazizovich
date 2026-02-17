@@ -5,6 +5,7 @@ import type React from "react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Heart, Shield, Target, Lock } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const values = [
   {
@@ -52,6 +53,7 @@ export function Values() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center mb-12"
           >
+            <SectionBadge title="Qadriyatlar" icon={Heart} />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Qadriyatlar va tamoyillar</h2>
             <p className="text-lg text-muted-foreground">Ish faoliyatimda amal qiladigan asosiy tamoyillar</p>
           </motion.div>
@@ -67,7 +69,7 @@ export function Values() {
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
 
-                  className="p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm"
+                  className="p-6 rounded-2xl glass-liquid transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">

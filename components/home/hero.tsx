@@ -19,14 +19,14 @@ export default function Hero() {
   return (
     <>
       <section className="relative overflow-hidden min-h-screen flex flex-col">
-        <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col">
+        <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10 flex-1 flex flex-col">
           <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-8"
+              className="mb-4"
             >
               <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
                 <Sparkles className="h-4 w-4" />
@@ -39,9 +39,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-8"
+              className="mb-4"
             >
-              <h1 id="main-title" className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              <h1 id="main-title" className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 Reach <strong>developers</strong> <span>&</span> <br />
                 <strong>creators</strong> <em className="italic">effortlessly</em>
               </h1>
@@ -52,7 +52,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground"
+              className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground"
             >
               Beautiful, accessible components built with Tailwind CSS and Framer Motion. Copy, paste, and customize to
               build your next project faster.
@@ -173,7 +173,7 @@ export default function Hero() {
                   </svg>
                 </div>
 
-              
+
                 {/* Next.js Logo */}
                 <div className="opacity-60 grayscale hover:opacity-100 hover:grayscale-0 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300">
                   <svg

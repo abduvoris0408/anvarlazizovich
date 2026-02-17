@@ -4,23 +4,20 @@ import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Scale, ArrowRight, Phone } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 import Link from "next/link"
-import type { About, Achievement } from "@/lib/types"
+import type { About } from "@/lib/types"
 
 export function LegalHero() {
   const [mounted, setMounted] = useState(false)
   const [about, setAbout] = useState<About | null>(null)
-  const [achievements, setAchievements] = useState<Achievement[]>([])
+
 
   useEffect(() => {
     setMounted(true)
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
       .then((r) => r.json())
       .then((d) => d.data && setAbout(d.data))
-      .catch(() => { })
-    fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/achievements?limit=100")
-      .then((r) => r.json())
-      .then((d) => d.data && setAchievements(d.data))
       .catch(() => { })
   }, [])
 
@@ -34,19 +31,16 @@ export function LegalHero() {
 
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col">
-      <div className="container mx-auto px-4 py-24 sm:py-32 relative z-10 flex-1 flex flex-col">
+      <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10 flex-1 flex flex-col">
         <div className="mx-auto max-w-4xl text-center flex-1 flex flex-col justify-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-4"
           >
-            <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <Scale className="h-4 w-4" />
-              Professional Legal Services
-            </Badge>
+            <SectionBadge title="Professional Legal Services" icon={Scale} />
           </motion.div>
 
           {/* Main Heading */}
@@ -54,9 +48,9 @@ export function LegalHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
+            className="mb-4"
           >
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance">
               <span className="block">{name}</span>
               <span className="block mt-2 text-primary">{title}</span>
             </h1>
@@ -68,7 +62,7 @@ export function LegalHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground text-pretty"
+            className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground text-pretty"
           >
             {about?.bio
               ? about.bio.slice(0, 200) + "..."
@@ -118,30 +112,42 @@ export function LegalHero() {
         >
           <div className="text-center">
             <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16">
-              {achievements.length > 0 ? (
-                achievements.map((ach) => (
-                  <div key={ach.id} className="text-center">
-                    <p className="text-3xl sm:text-4xl font-bold text-foreground">{ach.value}</p>
-                    <p className="text-sm text-muted-foreground">{ach.title}</p>
+              {about?.stats ? (
+                <>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">{about.stats.yearsExperience}+</p>
+                    <p className="text-sm text-muted-foreground">Yillik Tajriba</p>
                   </div>
-                ))
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">{about.stats.happyClients}+</p>
+                    <p className="text-sm text-muted-foreground">Mamnun Mijozlar</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">{about.stats.projectsCompleted}+</p>
+                    <p className="text-sm text-muted-foreground">Muvaffaqiyatli Ishlar</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground">98%</p>
+                    <p className="text-sm text-muted-foreground">Natija</p>
+                  </div>
+                </>
               ) : (
                 <>
                   <div className="text-center">
                     <p className="text-3xl sm:text-4xl font-bold text-foreground">15+</p>
-                    <p className="text-sm text-muted-foreground">Years Experience</p>
+                    <p className="text-sm text-muted-foreground">Yillik Tajriba</p>
                   </div>
                   <div className="text-center">
                     <p className="text-3xl sm:text-4xl font-bold text-foreground">500+</p>
-                    <p className="text-sm text-muted-foreground">Successful Cases</p>
+                    <p className="text-sm text-muted-foreground">Muvaffaqiyatli Ishlar</p>
                   </div>
                   <div className="text-center">
                     <p className="text-3xl sm:text-4xl font-bold text-foreground">1000+</p>
-                    <p className="text-sm text-muted-foreground">Satisfied Clients</p>
+                    <p className="text-sm text-muted-foreground">Mamnun Mijozlar</p>
                   </div>
                   <div className="text-center">
                     <p className="text-3xl sm:text-4xl font-bold text-foreground">98%</p>
-                    <p className="text-sm text-muted-foreground">Success Rate</p>
+                    <p className="text-sm text-muted-foreground">Natija</p>
                   </div>
                 </>
               )}

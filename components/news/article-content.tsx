@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react"
 import type { News } from "@/lib/types"
+import { formatDate } from "@/lib/utils"
 
 interface ArticleContentProps {
   article: News
@@ -35,15 +36,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
             <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-muted-foreground">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
                 <Tag className="h-3 w-3" />
-                {article.category}
+                {article.category?.name}
               </span>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2" suppressHydrationWarning>
                 <Calendar className="h-4 w-4" />
-                {new Date(article.publishedAt || article.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                {formatDate(article.publishedAt || article.createdAt)}
               </span>
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
@@ -57,6 +54,22 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
             <p className="text-xl text-muted-foreground">{article.excerpt}</p>
           </motion.header>
+
+          {/* Featured Image */}
+          {article.image?.url && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="mb-12 rounded-2xl overflow-hidden border border-border/50"
+            >
+              <img
+                src={article.image.url}
+                alt={article.title}
+                className="w-full h-auto object-cover max-h-[500px]"
+              />
+            </motion.div>
+          )}
 
           {/* Article content */}
           <motion.div

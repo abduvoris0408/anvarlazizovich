@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Link from "next/link"
 import { Clock, Wallet, Lock, Heart, ArrowRight, Award } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const iconMap: Record<string, React.ElementType> = {
   Clock,
@@ -42,7 +43,7 @@ export function MediationPreview() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="relative overflow-hidden py-24">
+    <section className="relative overflow-hidden py-12">
       <div className="bg-secondary/20 absolute top-1/2 -right-20 z-[-1] h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
       <div className="bg-secondary/20 absolute top-1/2 -left-20 z-[-1] h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
 
@@ -61,18 +62,15 @@ export function MediationPreview() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-sm mb-6"
               >
-                <Award className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground/80">Sertifikatlangan Mediator</span>
+                <SectionBadge title="Sertifikatlangan Mediator" className="mb-4" icon={Award} />
               </motion.div>
 
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-4xl md:text-5xl font-bold text-foreground mb-6"
+                className="text-3xl md:text-4xl font-bold text-foreground mb-4"
               >
                 Mediatsiya xizmatlari
               </motion.h2>
@@ -114,7 +112,7 @@ export function MediationPreview() {
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
 
-                    className="p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-gradient-to-b dark:from-white/5 dark:to-transparent backdrop-blur-sm"
+                    className="p-6 rounded-2xl glass-liquid transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                   >
                     <div className="p-2 rounded-lg bg-primary/10 w-fit mb-4">
                       <IconComponent className="h-5 w-5 text-primary" />

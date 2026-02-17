@@ -2,7 +2,8 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Check, Handshake } from "lucide-react"
+import { Check, Handshake, Clock } from "lucide-react"
+import { SectionBadge } from "@/components/ui/section-badge"
 
 const whenToUse = [
   "Biznes hamkorlar o'rtasidagi nizolar",
@@ -35,7 +36,7 @@ export function WhenToUse() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="order-2 lg:order-1"
             >
-              <div className="aspect-square rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm p-8 flex items-center justify-center">
+              <div className="aspect-square rounded-3xl border bg-card text-card-foreground shadow-sm p-8 flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                     <Handshake className="h-16 w-16 text-primary" />
@@ -52,10 +53,8 @@ export function WhenToUse() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6"
               >
-                <Handshake className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground/80">Qachon foydali</span>
+                <SectionBadge title="Qachon qo'llaniladi?" icon={Clock} />
               </motion.div>
 
               <motion.h2

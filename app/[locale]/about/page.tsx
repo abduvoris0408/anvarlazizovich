@@ -8,6 +8,7 @@ import { Education } from "@/components/about/education"
 import { Experience } from "@/components/about/experience"
 import { Skills } from "@/components/about/skills"
 import { Values } from "@/components/about/values"
+import { Certificates } from "@/components/about/certificates"
 
 export const metadata: Metadata = {
   title: "Men haqimda",
@@ -36,6 +37,7 @@ export default function AboutPage() {
         <Biography />
 
         <Education />
+        <Certificates />
         <Experience />
         <Skills />
         <Values />

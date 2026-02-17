@@ -44,28 +44,51 @@ export function PracticeGrid() {
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {services.map((service, index) => {
-              const IconComponent = iconMap[service.icon] || Scale
+              const IconComponent = iconMap[service.icon]
+              const details = service.details || service.ServiceDetails || []
+
               return (
                 <motion.div
                   key={service.id}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="group relative p-8 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm hover:border-primary/30 transition-all duration-300"
+                  className="group relative p-8 rounded-2xl border bg-card text-card-foreground shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 cursor-pointer overflow-hidden"
                 >
                   <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
 
+                  {/* Optional Image Background or Header */}
+                  {service.image?.url && (
+                    <div className="mb-6 rounded-xl overflow-hidden h-48 w-full">
+                      <img
+                        src={service.image.url}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+                  )}
+
                   <div className="flex items-start gap-6">
-                    <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex-shrink-0">
-                      <IconComponent className="h-8 w-8 text-primary" />
+                    <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex-shrink-0 flex items-center justify-center h-16 w-16">
+                      {IconComponent ? (
+                        <IconComponent className="h-8 w-8 text-primary" />
+                      ) : (
+                        <span className="text-3xl" role="img" aria-label="icon">
+                          {service.icon || "⚖️"}
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex-1">
@@ -74,9 +97,9 @@ export function PracticeGrid() {
                       </h3>
                       <p className="text-muted-foreground mb-6">{service.description}</p>
 
-                      {service.ServiceDetails && service.ServiceDetails.length > 0 && (
+                      {details.length > 0 && (
                         <ul className="space-y-3">
-                          {service.ServiceDetails.map((detail) => (
+                          {details.map((detail) => (
                             <li key={detail.id} className="flex items-center gap-3">
                               <div className="p-1 rounded-full bg-primary/10">
                                 <Check className="h-3 w-3 text-primary" />
