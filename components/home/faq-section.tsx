@@ -1,102 +1,121 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { ChevronDown, HelpCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { Plus, Minus, HelpCircle } from "lucide-react"
-import { SectionBadge } from "@/components/ui/section-badge"
-import type { FAQ } from "@/lib/types"
 
+interface FAQ {
+    id: string
+    question: string
+    answer: string
+    category?: {
+        id: string
+        name: string
+        slug: string
+        color: string
+    }
+}
 
 export function FAQSection() {
     const [faqs, setFaqs] = useState<FAQ[]>([])
-    const [openId, setOpenId] = useState<string | null>(null)
+    const [expandedId, setExpandedId] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const t = useTranslations("faq")
 
     useEffect(() => {
-        fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/faqs?sort=order&limit=100")
+        fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/faqs")
             .then((r) => r.json())
-            .then((d) => {
-                if (d.data) setFaqs(d.data)
-            })
+            .then((d) => d.data && setFaqs(d.data))
             .catch(() => { })
             .finally(() => setIsLoading(false))
     }, [])
 
-    if (!isLoading && faqs.length === 0) {
-        return (
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-                        <h2 className="text-xl font-semibold text-muted-foreground">{t("title")}</h2>
-                        <p className="mt-2 text-muted-foreground">Savol-javoblar hozircha mavjud emas.</p>
-                    </div>
-                </div>
-            </section>
-        )
-    }
-
     if (isLoading) {
         return (
-            <section className="py-20">
+            <section className="py-16 sm:py-20 bg-muted/30">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-3xl mx-auto space-y-4">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="h-16 glass-card rounded-xl animate-pulse" />
-                        ))}
+                    <div className="max-w-3xl mx-auto">
+                        <div className="text-center mb-12">
+                            <div className="h-10 w-72 bg-muted/40 rounded-lg mx-auto animate-pulse mb-3" />
+                            <div className="h-5 w-80 max-w-full bg-muted/20 rounded mx-auto animate-pulse" />
+                        </div>
+                        <div className="space-y-3">
+                            {[1, 2, 3, 4].map((i) => (
+                                <div key={i} className="p-5 rounded-xl border border-border bg-card animate-pulse">
+                                    <div className="h-5 w-3/4 bg-muted/30 rounded" />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
         )
     }
 
+    if (faqs.length === 0) return null
+
     return (
-        <section className="py-20">
+        <section className="py-16 sm:py-20 bg-muted/30">
             <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <SectionBadge title="F.A.Q" icon={HelpCircle} />
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t("title")}</h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">{t("subtitle")}</p>
-                </div>
+                <div className="max-w-3xl mx-auto">
+                    {/* Header */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-12"
+                    >
+                        <div className="inline-flex p-3 rounded-2xl bg-primary/10 border border-primary/15 mb-4">
+                            <HelpCircle className="h-6 w-6 text-primary" />
+                        </div>
+                        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-3">
+                            {t("title")}
+                        </h2>
+                        <p className="text-muted-foreground text-lg">
+                            {t("subtitle")}
+                        </p>
+                    </motion.div>
 
-                <div className="max-w-3xl mx-auto space-y-4">
-                    {faqs.map((faq, index) => (
-
-                        <motion.div
-                            key={faq.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="glass-card rounded-2xl overflow-hidden"
-                        >
-                            <button
-                                onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                                className="flex items-center justify-between w-full p-6 text-left hover:bg-white/5 transition-colors"
+                    {/* FAQ Items */}
+                    <div className="space-y-3">
+                        {faqs.map((faq, index) => (
+                            <motion.div
+                                key={faq.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
                             >
-                                <span className="font-semibold text-foreground text-lg">{faq.question}</span>
-                                {openId === faq.id ? (
-                                    <Minus className="h-5 w-5 text-primary flex-shrink-0 ml-4" />
-                                ) : (
-                                    <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0 ml-4" />
-                                )}
-                            </button>
-                            <AnimatePresence>
-                                {openId === faq.id && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    >
-                                        <div className="px-6 pb-6 text-muted-foreground text-leading-relaxed">
-                                            {faq.answer}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    ))}
+                                <button
+                                    onClick={() => setExpandedId(expandedId === faq.id ? null : faq.id)}
+                                    className={`w-full text-left p-5 rounded-xl border transition-all duration-300 ${expandedId === faq.id
+                                        ? "border-primary/30 bg-card shadow-sm"
+                                        : "border-border bg-card hover:border-primary/20"
+                                        }`}
+                                >
+                                    <div className="flex items-center justify-between gap-4">
+                                        <h3 className="text-base font-semibold text-foreground">{faq.question}</h3>
+                                        <ChevronDown
+                                            className={`h-5 w-5 text-primary shrink-0 transition-transform duration-300 ${expandedId === faq.id ? "rotate-180" : ""
+                                                }`}
+                                        />
+                                    </div>
+                                    {expandedId === faq.id && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: "auto" }}
+                                            transition={{ duration: 0.3 }}
+                                            className="mt-3 pt-3 border-t border-border/50"
+                                        >
+                                            <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                                        </motion.div>
+                                    )}
+                                </button>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

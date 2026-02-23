@@ -4,15 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Check, Handshake, Clock } from "lucide-react"
 import { SectionBadge } from "@/components/ui/section-badge"
-
-const whenToUse = [
-  "Biznes hamkorlar o'rtasidagi nizolar",
-  "Oilaviy kelishmovchiliklar",
-  "Mulkiy nizolar",
-  "Mehnat nizolari",
-  "Shartnomaviy nizolar",
-  "Qo'shnilar o'rtasidagi nizolar",
-]
+import { WHEN_TO_USE_MEDIATION } from "@/lib/constants"
 
 export function WhenToUse() {
   const ref = useRef(null)
@@ -36,13 +28,13 @@ export function WhenToUse() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="order-2 lg:order-1"
             >
-              <div className="aspect-square rounded-3xl border bg-card text-card-foreground shadow-sm p-8 flex items-center justify-center">
+              <div className="aspect-square rounded-3xl border border-border bg-card hover:border-primary/20 transition-colors p-8 flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                     <Handshake className="h-16 w-16 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">O'zaro kelishuv</h3>
-                  <p className="text-muted-foreground">Tomonlar o'zlari qaror qabul qiladi</p>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">O&apos;zaro kelishuv</h3>
+                  <p className="text-muted-foreground">Tomonlar o&apos;zlari qaror qabul qiladi</p>
                 </div>
               </div>
             </motion.div>
@@ -61,7 +53,7 @@ export function WhenToUse() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+                className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6"
               >
                 Mediatsiya qachon yordam beradi?
               </motion.h2>
@@ -72,7 +64,7 @@ export function WhenToUse() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="space-y-4"
               >
-                {whenToUse.map((item, index) => (
+                {WHEN_TO_USE_MEDIATION.map((item, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -80,7 +72,7 @@ export function WhenToUse() {
                     transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className="p-1 rounded-full bg-primary/10">
+                    <div className="p-1 rounded-full bg-primary/10 shrink-0">
                       <Check className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-foreground">{item}</span>

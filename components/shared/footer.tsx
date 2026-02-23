@@ -1,12 +1,11 @@
 "use client"
 
-
-import { Link, usePathname } from "@/i18n/routing"
-import { Scale, Phone, Mail, Send } from "lucide-react"
+import { Link } from "@/i18n/routing"
+import { Phone, Mail, Send, MapPin, ArrowUpRight } from "lucide-react"
+import { CourthouseLogo } from "./courthouse-logo"
 import { useLocale, useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import type { About } from "@/lib/types"
-
 
 const navKeys = [
   { key: "home", href: "/" },
@@ -16,7 +15,6 @@ const navKeys = [
   { key: "news", href: "/news" },
   { key: "blog", href: "/blog" },
 ] as const
-
 
 export function Footer() {
   const locale = useLocale()
@@ -35,7 +33,7 @@ export function Footer() {
   const phone = about?.phone || "+998 90 123 45 67"
   const email = about?.email || "info@burxonov.uz"
   const telegram = about?.telegram || "@burxonov_advokat"
-
+  const address = about?.address || "Toshkent shahri"
 
   const navigation = navKeys.map((item) => ({
     name: tNav(item.key),
@@ -43,32 +41,35 @@ export function Footer() {
   }))
 
   return (
-    <footer className="py-16 border-t border-border">
-      <div className="container mx-auto px-4">
+    <footer className="border-t border-border bg-card/50">
+      {/* Main footer content */}
+      <div className="container mx-auto px-4 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
-
-
-            <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
-              <Link href="/" className="flex items-center gap-2 mb-4 justify-center sm:justify-start">
-                <Scale className="h-6 w-6 text-primary" />
-                <span className="font-bold text-foreground text-lg">Burxonov</span>
+            <div className="sm:col-span-2 lg:col-span-1">
+              <Link href="/" className="flex items-center gap-2.5 mb-5 group">
+                <CourthouseLogo className="h-7 w-7 text-primary" />
+                <div className="flex flex-col">
+                  <span className="font-serif font-bold text-foreground text-lg leading-tight tracking-wide uppercase">Anvar</span>
+                  <span className="text-[10px] text-muted-foreground leading-none tracking-wider uppercase">yurist</span>
+                </div>
               </Link>
-              <p className="text-sm text-muted-foreground">{t("desc")}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{t("desc")}</p>
             </div>
 
             {/* Navigation */}
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-              <h3 className="font-semibold text-foreground mb-4">{t("pages")}</h3>
-              <ul className="space-y-3 w-full">
+            <div>
+              <h3 className="font-serif font-semibold text-foreground mb-5 text-base">{t("pages")}</h3>
+              <ul className="space-y-3">
                 {navigation.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors block"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
                     >
                       {item.name}
+                      <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Link>
                   </li>
                 ))}
@@ -76,24 +77,28 @@ export function Footer() {
             </div>
 
             {/* Contact */}
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-              <h3 className="font-semibold text-foreground mb-4">{t("contactTitle")}</h3>
-              <ul className="space-y-3 w-full">
+            <div>
+              <h3 className="font-serif font-semibold text-foreground mb-5 text-base">{t("contactTitle")}</h3>
+              <ul className="space-y-3">
                 <li>
                   <a
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
+                    className="flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Phone className="h-4 w-4" />
+                    <div className="p-1.5 rounded-md bg-primary/8 shrink-0">
+                      <Phone className="h-3.5 w-3.5 text-primary" />
+                    </div>
                     {phone}
                   </a>
                 </li>
                 <li>
                   <a
                     href={`mailto:${email}`}
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
+                    className="flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Mail className="h-4 w-4" />
+                    <div className="p-1.5 rounded-md bg-primary/8 shrink-0">
+                      <Mail className="h-3.5 w-3.5 text-primary" />
+                    </div>
                     {email}
                   </a>
                 </li>
@@ -102,33 +107,36 @@ export function Footer() {
                     href={`https://t.me/${telegram.replace("@", "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors justify-center sm:justify-start"
+                    className="flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Send className="h-4 w-4" />
-                    {telegram}
+                    <div className="p-1.5 rounded-md bg-primary/8 shrink-0">
+                      <Send className="h-3.5 w-3.5 text-primary" />
+                    </div>
+                    Telegram
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Legal */}
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-              <h3 className="font-semibold text-foreground mb-4">{t("legal")}</h3>
-              <ul className="space-y-3 w-full">
+            {/* Address & Legal */}
+            <div>
+              <h3 className="font-serif font-semibold text-foreground mb-5 text-base">Manzil</h3>
+              <div className="flex items-start gap-2.5 text-sm text-muted-foreground mb-6">
+                <div className="p-1.5 rounded-md bg-primary/8 shrink-0 mt-0.5">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <span>{address}</span>
+              </div>
 
+              <h3 className="font-serif font-semibold text-foreground mb-3 text-base">{t("legal")}</h3>
+              <ul className="space-y-2">
                 <li>
-                  <Link
-                    href="/privacy"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {t("privacy")}
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/terms"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {t("terms")}
                   </Link>
                 </li>
@@ -136,11 +144,36 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Gold divider */}
+          <div className="divider-gold mb-6" />
+
           {/* Bottom */}
-          <div className="pt-8 border-t border-border">
-            <p className="text-center text-sm text-muted-foreground">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Burxonov Anvar Lazizovich. {t("copyright")}
             </p>
+            <div className="flex items-center gap-4">
+              <a
+                href={`https://t.me/${telegram.replace("@", "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-primary/8 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Send className="h-4 w-4" />
+              </a>
+              <a
+                href={`tel:${phone.replace(/\s/g, "")}`}
+                className="p-2 rounded-lg bg-primary/8 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+              </a>
+              <a
+                href={`mailto:${email}`}
+                className="p-2 rounded-lg bg-primary/8 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Mail className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

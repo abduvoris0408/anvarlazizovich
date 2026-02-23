@@ -17,18 +17,31 @@
         "badge": "Sertifikatlangan Mediator",
         "subtitle": "Advokat & Sertifikatlangan Mediator",
         "cta": "Bepul konsultatsiya",
-        "callNow": "Hozir qo'ng'iroq qiling"
+        "callNow": "Hozir qo'ng'iroq qiling",
+        "whyChooseUs": "Nima uchun bizni tanlashadi",
+        "advantage1Title": "Yuqori natija",
+        "advantage1Desc": "500+ muvaffaqiyatli ish",
+        "advantage2Title": "Professional yondashuv",
+        "advantage2Desc": "Har bir ishga individual yondashuv",
+        "advantage3Title": "15+ yillik tajriba",
+        "advantage3Desc": "Huquqiy sohadagi keng tajriba",
+        "advantage4Title": "Natijaga yo'naltirilgan",
+        "advantage4Desc": "Har bir ishda eng yaxshi natijaga intilamiz",
+        "yearsExp": "Yillik Tajriba",
+        "clients": "Mamnun Mijozlar",
+        "cases": "Muvaffaqiyatli Ishlar",
+        "awards": "Mukofotlar"
     },
     "practice": {
-        "title": "Xizmat yo'nalishlari",
+        "title": "Bizning xizmatlarimiz",
         "subtitle": "Quyidagi huquqiy sohalarda professional xizmat ko'rsatamiz",
         "viewAll": "Barcha xizmatlar",
         "learnMore": "Batafsil",
         "noData": "Xizmatlar haqida ma'lumot yo'q"
     },
     "mediation": {
-        "title": "Mediatsiya",
-        "subtitle": "Nizolarni tinch yo'l bilan hal qilish",
+        "title": "Mediatsiya xizmati",
+        "subtitle": "Nizolarni sud ishtirokisiz, har ikki tomon uchun qulay yechimlar bilan hal qilish",
         "learnMore": "Batafsil",
         "badge": "Sertifikatlangan Mediator",
         "ctaTitle": "Nizoni tinch yo'l bilan hal qilishni xohlaysizmi?",
@@ -41,6 +54,7 @@
         },
         "benefits": {
             "title": "Mediatsiya afzalliklari",
+            "subtitle": "Nima uchun mediatsiya sud jarayonlariga nisbatan samaraliroq bo'lishi mumkin?",
             "speed": {
                 "title": "Tezlik",
                 "desc": "Mediatsiya jarayoni odatda bir necha kundan bir necha haftagacha davom etadi, sud jarayonlari esa oylab cho'zilishi mumkin."
@@ -102,9 +116,9 @@
         }
     },
     "articles": {
-        "title": "So'nggi maqolalar",
-        "subtitle": "Huquqiy yangiliklar va foydali maqolalar",
-        "viewAll": "Barcha maqolalar",
+        "title": "Yangiliklar",
+        "subtitle": "Huquqiy soha bo'yicha foydali ma'lumotlar va yangiliklar",
+        "viewAll": "Barcha yangiliklar",
         "readMore": "O'qish",
         "noData": "Maqolalar haqida ma'lumot yuklanmoqda...",
         "backToAll": "Barcha maqolalar",
@@ -112,25 +126,35 @@
         "contactUs": "Biz bilan bog'laning"
     },
     "testimonials": {
-        "title": "Mijozlar fikri",
+        "title": "Mijozlar fikrlari",
         "subtitle": "Muvaffaqiyatli ishlar haqida mijozlarimiz fikri",
         "noData": "Hozircha fikrlar yo'q"
     },
     "cta": {
-        "title": "Huquqiy muammo bormi?",
-        "subtitle": "Birinchi konsultatsiya bepul. Hoziroq bog'laning va professional huquqiy yordam oling.",
+        "title": "Huquqiy yordam kerakmi?",
+        "subtitle": "Birinchi konsultatsiya bepul. Muammoingizni bizga aytib bering va eng yaxshi yechimni birgalikda topamiz.",
         "callNow": "Hozir qo'ng'iroq qiling",
         "needAdvice": "Huquqiy maslahat kerakmi?",
         "practiceSubtitle": "Birinchi konsultatsiya bepul. Muammoingizni tushuntirib bering va biz sizga eng yaxshi yechimni taklif qilamiz.",
         "contactBtn": "Murojaat qilish"
     },
     "about": {
-        "heroTitle": "Haqida",
-        "heroSubtitle": "Professional advokat va sertifikatlangan mediator",
+        "heroTitle": "Men haqimda",
+        "heroSubtitle": "Professional advokat va sertifikatlangan mediator haqida batafsil ma'lumot",
         "biographyTitle": "Biografiya",
+        "biographyBadge": "Biografiya",
         "educationTitle": "Ta'lim va sertifikatlar",
+        "educationBadge": "Ta'lim",
         "experienceTitle": "Ish tajribasi",
-        "valuesTitle": "Qadriyatlar",
+        "experienceBadge": "Tajriba",
+        "certificatesTitle": "Sertifikat va Yutuqlar",
+        "certificatesBadge": "Yutuqlar",
+        "certificatesSubtitle": "Professional faoliyat davomida erishilgan yutuqlar",
+        "valuesTitle": "Qadriyatlar va tamoyillar",
+        "valuesBadge": "Qadriyatlar",
+        "valuesSubtitle": "Ish faoliyatimda amal qiladigan asosiy tamoyillar",
+        "skillsTitle": "Professional ko'nikmalar",
+        "skillsBadge": "Ko'nikmalar",
         "noData": "Ma'lumot yuklanmoqda..."
     },
     "contact": {
@@ -193,7 +217,7 @@
     "meta": {
         "homeTitle": "Burxonov Anvar Lazizovich - Advokat & Sertifikatlangan Mediator",
         "homeDesc": "Professional huquqiy xizmatlar: fuqarolik, jinoyat, oilaviy, mehnat huquqi va mediatsiya. 15+ yillik tajriba, 500+ muvaffaqiyatli ishlar.",
-        "aboutTitle": "Haqida",
+        "aboutTitle": "Men haqimda",
         "practiceTitle": "Xizmatlar",
         "mediationTitle": "Mediatsiya",
         "newsTitle": "Yangiliklar",
@@ -202,11 +226,12 @@
     },
     "partners": {
         "title": "Hamkorlarimiz",
-        "subtitle": "Biz bilan hamkorlik qiluvchi tashkilotlar"
+        "subtitle": "Hamkorlarimiz tomonidan ishonchli",
+        "trustedBy": "Hamkorlarimiz tomonidan ishonchli"
     },
     "faq": {
         "title": "Ko'p beriladigan savollar",
-        "subtitle": "Eng ko'p uchraydigan savollarga javoblar"
+        "subtitle": "Eng ko'p so'raladigan savollar va javoblar"
     },
     "skills": {
         "title": "Professional ko'nikmalar"

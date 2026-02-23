@@ -6,142 +6,160 @@ import Link from "next/link"
 import type { News } from "@/lib/types"
 import { formatDate } from "@/lib/utils"
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react"
-import { SectionBadge } from "@/components/ui/section-badge"
+import { useTranslations } from "next-intl"
 
 export function ArticlesPreview() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 }) // Reduced amount
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [articles, setArticles] = useState<News[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const t = useTranslations("articles")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=3")
       .then((r) => r.json())
       .then((d) => {
-        console.log("News Data:", d) // Debug log
         if (d.data) setArticles(d.data)
       })
-      .catch((e) => console.error("News Fetch Error:", e))
+      .catch(() => { })
+      .finally(() => setIsLoading(false))
   }, [])
 
-  if (articles.length === 0) {
+  if (isLoading) {
     return (
-      <section className="py-12 text-center text-muted-foreground">
-        Loading articles...
+      <section className="py-16 sm:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-12">
+              <div className="h-10 w-64 bg-muted/40 rounded-lg animate-pulse mb-3" />
+              <div className="h-5 w-96 max-w-full bg-muted/20 rounded animate-pulse" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="rounded-2xl border border-border bg-card overflow-hidden animate-pulse">
+                  <div className="w-full h-48 bg-muted/30" />
+                  <div className="p-6 space-y-3">
+                    <div className="flex gap-2">
+                      <div className="h-5 w-20 bg-muted/30 rounded-full" />
+                      <div className="h-5 w-24 bg-muted/20 rounded-full" />
+                    </div>
+                    <div className="h-6 w-3/4 bg-muted/30 rounded" />
+                    <div className="space-y-2">
+                      <div className="h-4 w-full bg-muted/20 rounded" />
+                      <div className="h-4 w-5/6 bg-muted/20 rounded" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     )
   }
 
+  if (!isLoading && articles.length === 0) {
+    return null
+  }
+
   return (
-    <section className="relative overflow-hidden py-12">
+    <section className="py-16 sm:py-20">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4"
       >
-        <div className="text-center mb-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
           >
-            <SectionBadge title="Yangiliklar va maqolalar" icon={BookOpen} />
+            <div>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-3">
+                {t("title")}
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-xl">
+                {t("subtitle")}
+              </p>
+            </div>
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all shrink-0 group"
+            >
+              {t("viewAll")}
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
 
-          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent mb-4">
-            So&apos;nggi maqolalar
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Huquqiy soha bo&apos;yicha foydali ma&apos;lumotlar va yangiliklar
-          </p>
-        </div>
+          {/* Articles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articles.map((article, index) => (
+              <motion.article
+                key={article.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                className="group"
+              >
+                <Link href={`/news/${article.slug || article.id}`}>
+                  <div className="rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                    {/* Image */}
+                    <div className="relative w-full h-48 overflow-hidden bg-muted/10">
+                      {article.image?.url ? (
+                        <img
+                          src={article.image.url}
+                          alt={article.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/3 to-primary/8">
+                          <BookOpen className="w-10 h-10 text-primary/20" />
+                        </div>
+                      )}
+                    </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {articles.map((article, index) => (
-            <motion.article
-              key={article.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="group"
-            >
-              <Link href={`/news/${article.slug || article.id}`}>
-
-                <div className="relative rounded-2xl p-6 glass-liquid hover:border-primary/30 transition-all duration-300 h-full flex flex-col">
-                  {/* Image Container */}
-                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-muted/20">
-                    {article.image?.url ? (
-                      <img
-                        src={article.image.url}
-                        alt={article.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
-                        <BookOpen className="w-12 h-12 text-primary/20" />
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-3 text-xs text-muted-foreground flex-wrap">
+                        {article.category?.name && (
+                          <span className="px-2.5 py-1 rounded-full bg-primary/8 text-primary font-medium">
+                            {article.category.name}
+                          </span>
+                        )}
+                        <span className="flex items-center gap-1" suppressHydrationWarning>
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(article.publishedAt || article.createdAt)}
+                        </span>
+                        {article.readTime && (
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {article.readTime}
+                          </span>
+                        )}
                       </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
-                  </div>
 
-                  <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-primary/10 to-transparent blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
 
-                  <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                    <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                      {article.category?.name}
-                    </span>
-                    <span className="flex items-center gap-1" suppressHydrationWarning>
-                      <Calendar className="h-3 w-3" />
-                      {formatDate(article.publishedAt || article.createdAt)}
-                    </span>
-                    {article.readTime && (
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {article.readTime}
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{article.excerpt}</p>
+
+                      <span className="inline-flex items-center gap-1.5 text-sm text-primary font-medium group-hover:gap-2.5 transition-all">
+                        O&apos;qish
+                        <ArrowRight className="h-3.5 w-3.5" />
                       </span>
-                    )}
+                    </div>
                   </div>
-
-                  <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {article.title}
-                  </h3>
-
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{article.excerpt}</p>
-
-                  <span className="inline-flex items-center gap-2 text-sm text-primary font-medium group-hover:gap-3 transition-all">
-                    O&apos;qish
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
-            </motion.article>
-          ))}
+                </Link>
+              </motion.article>
+            ))}
+          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center mt-6"
-        >
-          <Link
-            href="/news"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/30 bg-primary/5 text-foreground hover:bg-primary/10 transition-all duration-300 group"
-          >
-            Barcha maqolalarni ko&apos;rish
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
       </motion.div>
     </section>
   )

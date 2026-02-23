@@ -1,128 +1,90 @@
 "use client"
 
-import type React from "react"
-
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Link from "next/link"
-import { Clock, Wallet, Lock, Heart, ArrowRight, Award } from "lucide-react"
-import { SectionBadge } from "@/components/ui/section-badge"
+import { MEDIATION_BENEFITS } from "@/lib/constants"
+import { ArrowRight, Clock, DollarSign, Handshake, ShieldCheck, Smile, Users } from "lucide-react"
+import type React from "react"
+import { useTranslations } from "next-intl"
 
 const iconMap: Record<string, React.ElementType> = {
   Clock,
-  Wallet,
-  Lock,
-  Heart,
+  DollarSign,
+  Handshake,
+  ShieldCheck,
+  Smile,
+  Users,
 }
-
-const mediationBenefits = [
-  {
-    title: "Tezlik",
-    description: "Mediatsiya jarayoni odatda bir necha kundan bir necha haftagacha davom etadi.",
-    icon: "Clock",
-  },
-  {
-    title: "Tejamkorlik",
-    description: "Mediatsiya xarajatlari sud xarajatlariga nisbatan ancha kam.",
-    icon: "Wallet",
-  },
-  {
-    title: "Maxfiylik",
-    description: "Sud jarayonlaridan farqli o'laroq, mediatsiya maxfiy o'tkaziladi.",
-    icon: "Lock",
-  },
-  {
-    title: "Munosabatlarni saqlash",
-    description: "Mediatsiya tomonlar o'rtasidagi munosabatlarni saqlashga yordam beradi.",
-    icon: "Heart",
-  },
-]
 
 export function MediationPreview() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const t = useTranslations("mediation")
 
   return (
-    <section className="relative overflow-hidden py-12">
-      <div className="bg-secondary/20 absolute top-1/2 -right-20 z-[-1] h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
-      <div className="bg-secondary/20 absolute top-1/2 -left-20 z-[-1] h-64 w-64 rounded-full opacity-80 blur-3xl"></div>
-
+    <section className="py-16 sm:py-20 bg-muted/30">
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
+          >
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <SectionBadge title="Sertifikatlangan Mediator" className="mb-4" icon={Award} />
-              </motion.div>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-3">
+                {t("title")}
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-xl">
+                {t("subtitle")}
+              </p>
+            </div>
+            <Link
+              href="/mediation"
+              className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all shrink-0 group"
+            >
+              {t("learnMore")}
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-3xl md:text-4xl font-bold text-foreground mb-4"
-              >
-                Mediatsiya xizmatlari
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-lg text-muted-foreground mb-8"
-              >
-                Nizolarni suddan tashqari tartibda, tez va samarali hal qilish. Professional mediatsiya xizmatlari
-                orqali tomonlar o'rtasida kelishuvga erishish.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <Link
-                  href="/mediation"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 group"
+          {/* Benefits Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {MEDIATION_BENEFITS.map((benefit, index) => {
+              const IconComponent = iconMap[benefit.icon]
+              return (
+                <motion.div
+                  key={benefit.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
+                  className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
                 >
-                  Mediatsiya bo'yicha murojaat qilish
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-            </div>
+                  {/* Icon */}
+                  <div className="p-3 rounded-xl bg-primary/10 border border-primary/15 w-fit mb-4 group-hover:bg-primary/15 transition-colors">
+                    {IconComponent ? (
+                      <IconComponent className="h-6 w-6 text-primary" />
+                    ) : (
+                      <Handshake className="h-6 w-6 text-primary" />
+                    )}
+                  </div>
 
-            {/* Right Content - Benefits Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {mediationBenefits.map((benefit, index) => {
-                const IconComponent = iconMap[benefit.icon] || Clock
-                return (
-                  <motion.div
-                    key={benefit.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
 
-                    className="p-6 rounded-2xl glass-liquid transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                  >
-                    <div className="p-2 rounded-lg bg-primary/10 w-fit mb-4">
-                      <IconComponent className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                  </motion.div>
-                )
-              })}
-            </div>
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </motion.div>

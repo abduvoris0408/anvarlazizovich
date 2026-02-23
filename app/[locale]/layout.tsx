@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
@@ -8,7 +8,16 @@ import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
 import NextTopLoader from "nextjs-toploader"
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] })
+const inter = Inter({
+    subsets: ["latin", "cyrillic"],
+    variable: "--font-inter",
+})
+
+const playfair = Playfair_Display({
+    subsets: ["latin", "cyrillic"],
+    variable: "--font-playfair",
+    weight: ["400", "500", "600", "700", "800", "900"],
+})
 
 type Props = {
     children: React.ReactNode
@@ -72,8 +81,8 @@ export default async function LocaleLayout({ children, params }: Props) {
 
     return (
         <html lang={locale} suppressHydrationWarning>
-            <body className={inter.className}>
-                <NextTopLoader color="#e78a53" showSpinner={false} height={3} />
+            <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+                <NextTopLoader color="#C9A84C" showSpinner={false} height={3} />
                 <NextIntlClientProvider messages={messages}>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                         {children}

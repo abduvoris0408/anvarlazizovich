@@ -17,18 +17,31 @@
         "badge": "Certified Mediator",
         "subtitle": "Lawyer & Certified Mediator",
         "cta": "Free Consultation",
-        "callNow": "Call Now"
+        "callNow": "Call Now",
+        "whyChooseUs": "Why Choose Us",
+        "advantage1Title": "High Success Rate",
+        "advantage1Desc": "500+ successful cases",
+        "advantage2Title": "Professional Approach",
+        "advantage2Desc": "Individual approach to every case",
+        "advantage3Title": "15+ Years Experience",
+        "advantage3Desc": "Broad expertise in legal field",
+        "advantage4Title": "Result-oriented",
+        "advantage4Desc": "We strive for the best outcome in every case",
+        "yearsExp": "Years Experience",
+        "clients": "Happy Clients",
+        "cases": "Successful Cases",
+        "awards": "Awards"
     },
     "practice": {
-        "title": "Practice Areas",
+        "title": "Our Services",
         "subtitle": "We provide professional services in the following legal areas",
         "viewAll": "All Services",
         "learnMore": "Learn More",
         "noData": "No service information available"
     },
     "mediation": {
-        "title": "Mediation",
-        "subtitle": "Peaceful Dispute Resolution",
+        "title": "Mediation Service",
+        "subtitle": "Resolving disputes without court, with comfortable solutions for both parties",
         "learnMore": "Learn More",
         "badge": "Certified Mediator",
         "ctaTitle": "Want to resolve a dispute peacefully?",
@@ -41,6 +54,7 @@
         },
         "benefits": {
             "title": "Benefits of Mediation",
+            "subtitle": "Why mediation can be more effective than court proceedings?",
             "speed": {
                 "title": "Speed",
                 "desc": "The mediation process usually takes from a few days to a few weeks, whereas court proceedings can last for months."
@@ -102,9 +116,9 @@
         }
     },
     "articles": {
-        "title": "Latest Articles",
-        "subtitle": "Legal news and useful articles",
-        "viewAll": "All Articles",
+        "title": "News",
+        "subtitle": "Useful information and news in the legal field",
+        "viewAll": "All News",
         "readMore": "Read",
         "noData": "Loading article information...",
         "backToAll": "All Articles",
@@ -117,20 +131,30 @@
         "noData": "No testimonials yet"
     },
     "cta": {
-        "title": "Have a legal problem?",
-        "subtitle": "First consultation is free. Contact us right now and get professional legal help.",
+        "title": "Need legal help?",
+        "subtitle": "First consultation is free. Tell us about your problem and we will find the best solution together.",
         "callNow": "Call Now",
         "needAdvice": "Need legal advice?",
         "practiceSubtitle": "First consultation is free. Explain your problem and we will offer the best solution.",
         "contactBtn": "Contact Us"
     },
     "about": {
-        "heroTitle": "About Us",
-        "heroSubtitle": "Professional Lawyer & Certified Mediator",
+        "heroTitle": "About Me",
+        "heroSubtitle": "Detailed information about a professional lawyer and certified mediator",
         "biographyTitle": "Biography",
+        "biographyBadge": "Biography",
         "educationTitle": "Education & Certificates",
+        "educationBadge": "Education",
         "experienceTitle": "Work Experience",
-        "valuesTitle": "Values",
+        "experienceBadge": "Experience",
+        "certificatesTitle": "Certificates & Achievements",
+        "certificatesBadge": "Achievements",
+        "certificatesSubtitle": "Achievements in professional activity",
+        "valuesTitle": "Values & Principles",
+        "valuesBadge": "Values",
+        "valuesSubtitle": "Core principles in my professional activity",
+        "skillsTitle": "Professional Skills",
+        "skillsBadge": "Skills",
         "noData": "Loading information..."
     },
     "contact": {
@@ -193,7 +217,7 @@
     "meta": {
         "homeTitle": "Burxonov Anvar Lazizovich - Lawyer & Certified Mediator",
         "homeDesc": "Professional legal services: civil, criminal, family, labor law and mediation. 15+ years of experience, 500+ successful cases.",
-        "aboutTitle": "About Us",
+        "aboutTitle": "About Me",
         "practiceTitle": "Services",
         "mediationTitle": "Mediation",
         "newsTitle": "News",
@@ -202,11 +226,12 @@
     },
     "partners": {
         "title": "Our Partners",
-        "subtitle": "Organizations we cooperate with"
+        "subtitle": "Organizations we cooperate with",
+        "trustedBy": "Trusted by our partners"
     },
     "faq": {
         "title": "Frequently Asked Questions",
-        "subtitle": "Answers to the most common questions"
+        "subtitle": "Answers to the most frequently asked questions"
     },
     "skills": {
         "title": "Professional Skills"

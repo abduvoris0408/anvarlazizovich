@@ -4,13 +4,8 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { SectionBadge } from "@/components/ui/section-badge"
 import { GitMerge } from "lucide-react"
+import { MEDIATION_PROCESS_STEPS } from "@/lib/constants"
 
-const processSteps = [
-  { step: 1, title: "Dastlabki konsultatsiya", description: "Tomonlar bilan alohida suhbat va mediatsiya jarayonini tushuntirish." },
-  { step: 2, title: "Birgalikdagi sessiya", description: "Tomonlarni bir joyga to'plash va muammoni muhokama qilish." },
-  { step: 3, title: "Muzokaralar", description: "Tomonlarning manfaatlarini aniqlash va yechim variantlarini izlash." },
-  { step: 4, title: "Kelishuv", description: "O'zaro maqbul yechimga erishish va kelishuv hujjatini tuzish." },
-]
 export function MediationProcess() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -32,7 +27,7 @@ export function MediationProcess() {
             className="text-center mb-12"
           >
             <SectionBadge title="Jarayon" icon={GitMerge} />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Mediatsiya jarayoni</h2>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">Mediatsiya jarayoni</h2>
             <p className="text-lg text-muted-foreground">Mediatsiya qanday bosqichlardan iborat?</p>
           </motion.div>
 
@@ -41,7 +36,7 @@ export function MediationProcess() {
             <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block" />
 
             <div className="space-y-8">
-              {processSteps.map((step, index) => (
+              {MEDIATION_PROCESS_STEPS.map((step, index) => (
                 <motion.div
                   key={step.step}
                   initial={{ opacity: 0, x: -20 }}
@@ -56,7 +51,7 @@ export function MediationProcess() {
 
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-2xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all"
+                    className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-md transition-all"
                   >
                     <div className="flex items-center gap-4 mb-3">
                       <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm md:hidden">

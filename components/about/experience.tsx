@@ -1,11 +1,9 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import type { About } from "@/lib/types"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { Briefcase } from "lucide-react"
-import { SectionBadge } from "@/components/ui/section-badge"
-
+import { useTranslations } from "next-intl"
 
 interface ExperienceItem {
   id: string
@@ -17,48 +15,32 @@ interface ExperienceItem {
   description: string
 }
 
-
 export function Experience() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [experience, setExperience] = useState<ExperienceItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
-
+  const t = useTranslations("about")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/experiences?sort=order&limit=100")
       .then((r) => r.json())
       .then((d) => {
-        if (d.data) {
-          setExperience(d.data)
-        }
+        if (d.data) setExperience(d.data)
       })
       .catch(() => { })
       .finally(() => setIsLoading(false))
   }, [])
 
-  if (!isLoading && experience.length === 0) {
-    return (
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-            <h2 className="text-xl font-semibold text-muted-foreground">Ish tajribasi</h2>
-            <p className="mt-2 text-muted-foreground">Ma'lumotlar hozircha mavjud emas.</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
+  if (!isLoading && experience.length === 0) return null
 
   if (isLoading) {
     return (
-      <section className="py-16">
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="h-10 w-48 bg-muted rounded-md mx-auto mb-12 animate-pulse" />
             {[1, 2, 3].map((i) => (
               <div key={i} className="pl-0 md:pl-20 relative">
-                <div className="h-32 glass-card rounded-2xl animate-pulse" />
+                <div className="h-32 bg-muted rounded-2xl animate-pulse" />
               </div>
             ))}
           </div>
@@ -68,64 +50,92 @@ export function Experience() {
   }
 
   return (
-    <section className="py-16">
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto px-4"
-      >
+    <section className="py-16 sm:py-20">
+      <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
+          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-center mb-12"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
           >
-            <SectionBadge title="Tajriba" icon={Briefcase} />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ish tajribasi</h2>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-4">
+              <Briefcase className="h-3.5 w-3.5" />
+              {t("experienceBadge")}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground font-serif">
+              {t("experienceTitle")}
+            </h2>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mx-auto w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mt-4"
+            />
           </motion.div>
 
+          {/* Timeline */}
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block" />
+            {/* Animated timeline line */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block origin-top"
+            />
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {experience.map((exp, index) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+                  key={exp.id || index}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
                   className="relative pl-0 md:pl-20"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-6 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background hidden md:block" />
-
+                  {/* Timeline dot with pulse */}
+                  <div className="absolute left-6 top-8 hidden md:block">
+                    <div className="w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                    {exp.current && (
+                      <motion.div
+                        animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute inset-0 w-4 h-4 rounded-full bg-primary/30"
+                      />
+                    )}
+                  </div>
 
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-2xl border bg-card text-card-foreground shadow-sm cursor-pointer"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                    className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                   >
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                    <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       <div>
-                        <h3 className="text-xl font-semibold text-foreground">{exp.position}</h3>
-                        <p className="text-primary font-medium">{exp.company}</p>
+                        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {exp.position}
+                        </h3>
+                        <p className="text-primary/80 font-medium mt-0.5">{exp.company}</p>
                       </div>
-
-                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                        {new Date(exp.startDate).getFullYear()} - {exp.current ? "Hozirgacha" : (exp.endDate ? new Date(exp.endDate).getFullYear() : "")}
+                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium whitespace-nowrap">
+                        {new Date(exp.startDate).getFullYear()} – {exp.current ? "Hozirgacha" : (exp.endDate ? new Date(exp.endDate).getFullYear() : "")}
                       </span>
                     </div>
-                    <p className="text-muted-foreground">{exp.description}</p>
+                    {exp.description && (
+                      <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
+                    )}
                   </motion.div>
                 </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
