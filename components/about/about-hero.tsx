@@ -32,7 +32,7 @@ export function AboutHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="flex justify-center mb-6"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
@@ -55,7 +55,7 @@ export function AboutHero() {
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.35, delay: 0.15, ease: "easeOut" }}
             className="mx-auto w-24 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mb-6"
           />
 
@@ -63,7 +63,7 @@ export function AboutHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
             className="text-xl text-primary font-medium mb-4"
           >
             {title}
@@ -73,7 +73,7 @@ export function AboutHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 0.25, ease: "easeOut" }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
           >
             {t("heroSubtitle")}
@@ -83,7 +83,7 @@ export function AboutHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 0.15, ease: "easeOut" }}
             className="flex flex-wrap items-center justify-center gap-8"
           >
             {[
@@ -95,7 +95,7 @@ export function AboutHero() {
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
+                transition={{ duration: 0.3, delay: 0.7 + i * 0.1 }}
                 className="flex items-center gap-2 text-muted-foreground"
               >
                 <item.icon className="h-4 w-4 text-primary" />

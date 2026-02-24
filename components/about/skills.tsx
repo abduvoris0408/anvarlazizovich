@@ -53,7 +53,7 @@ export function Skills() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.3 }}
                     className="max-w-4xl mx-auto border border-border rounded-2xl p-8 md:p-12 bg-card"
                 >
                     {/* Section Header */}
@@ -69,7 +69,7 @@ export function Skills() {
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
                             className="mx-auto w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mt-4"
                         />
                     </div>
@@ -82,7 +82,7 @@ export function Skills() {
                                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.08, duration: 0.5 }}
+                                transition={{ delay: index * 0.08, duration: 0.3 }}
                             >
                                 <div className="flex justify-between items-end mb-2">
                                     <span className="font-semibold text-foreground flex items-center gap-2">

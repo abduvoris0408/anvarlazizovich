@@ -1,30 +1,26 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import Link from "next/link"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { Link } from "@/i18n/routing"
 import type { News } from "@/lib/types"
 import { formatDate } from "@/lib/utils"
 import { ArrowRight, Calendar, Clock, BookOpen } from "lucide-react"
-
-
-
+import { useTranslations } from "next-intl"
 import { SpinnerCustom } from "@/components/ui/spinner"
 
 export function NewsGrid() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [articles, setArticles] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const t = useTranslations("articles")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/news?limit=100")
       .then((r) => r.json())
       .then((d) => {
-        console.log("NewsGrid Data:", d)
         if (d.data) setArticles(d.data)
       })
-      .catch((e) => console.error("NewsGrid Error:", e))
+      .catch(() => { })
       .finally(() => setIsLoading(false))
   }, [])
 
@@ -33,7 +29,7 @@ export function NewsGrid() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="glass-effect rounded-3xl p-8 text-center max-w-2xl mx-auto">
-            <p className="text-muted-foreground">Yangiliklar hozircha mavjud emas.</p>
+            <p className="text-muted-foreground">{t("noData")}</p>
           </div>
         </div>
       </section>
@@ -55,12 +51,10 @@ export function NewsGrid() {
   return (
     <section className="py-16">
       <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-6xl mx-auto">
@@ -68,11 +62,10 @@ export function NewsGrid() {
             {articles.map((article, index) => (
               <motion.article
                 key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -5 }}
                 className="group"
               >
@@ -117,7 +110,7 @@ export function NewsGrid() {
                     <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{article.excerpt}</p>
 
                     <span className="inline-flex items-center gap-2 text-sm text-primary font-medium group-hover:gap-3 transition-all">
-                      O&apos;qish
+                      {t("readMore")}
                       <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>

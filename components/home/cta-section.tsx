@@ -28,14 +28,14 @@ export function CTASection() {
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="p-8 sm:p-12 lg:p-16 rounded-3xl border border-primary/15 bg-card relative overflow-hidden"
           >
             {/* Background decorations */}

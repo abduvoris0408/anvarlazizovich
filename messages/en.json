@@ -50,11 +50,15 @@
         "whatIs": {
             "title": "What is Mediation?",
             "desc1": "Mediation is an alternative dispute resolution method where a neutral third party (mediator) helps disputing parties find a mutually acceptable solution.",
-            "desc2": "In mediation, the mediator does not make decisions but guides parties towards dialogue and helps identify their interests."
+            "desc2": "In mediation, the mediator does not make decisions but guides parties towards dialogue and helps identify their interests.",
+            "badgeTitle": "Basic Concepts",
+            "neutralTitle": "Neutral Approach",
+            "neutralDesc": "The mediator does not side with either party and maintains a neutral position"
         },
         "benefits": {
             "title": "Benefits of Mediation",
             "subtitle": "Why mediation can be more effective than court proceedings?",
+            "badgeTitle": "Benefits",
             "speed": {
                 "title": "Speed",
                 "desc": "The mediation process usually takes from a few days to a few weeks, whereas court proceedings can last for months."
@@ -83,6 +87,9 @@
         "whenToUse": {
             "title": "When to use Mediation?",
             "subtitle": "Mediation can be an effective solution in the following cases",
+            "badgeTitle": "When to use?",
+            "illustrationTitle": "Mutual Agreement",
+            "illustrationDesc": "Parties make their own decisions",
             "items": [
                 "Disputes between business partners",
                 "Family disagreements",
@@ -95,6 +102,7 @@
         "process": {
             "title": "Mediation Process",
             "subtitle": "Mediation is carried out in 4 stages",
+            "badgeTitle": "Process",
             "steps": [
                 {
                     "title": "Preliminary Consultation",
@@ -123,7 +131,9 @@
         "noData": "Loading article information...",
         "backToAll": "All Articles",
         "needAdvice": "Need legal advice?",
-        "contactUs": "Contact Us"
+        "contactUs": "Contact Us",
+        "authorName": "Burxonov Anvar Lazizovich",
+        "authorRole": "Lawyer & Certified Mediator"
     },
     "testimonials": {
         "title": "Client Testimonials",

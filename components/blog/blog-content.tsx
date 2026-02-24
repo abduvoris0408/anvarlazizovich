@@ -74,7 +74,7 @@ export function BlogContent({ post }: BlogContentProps) {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
+                            transition={{ delay: 0.1 }}
                             className="rounded-2xl overflow-hidden mb-10"
                         >
                             <img
@@ -88,7 +88,7 @@ export function BlogContent({ post }: BlogContentProps) {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ delay: 0.15 }}
                         className="prose prose-lg dark:prose-invert max-w-none"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
@@ -97,7 +97,7 @@ export function BlogContent({ post }: BlogContentProps) {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
+                        transition={{ delay: 0.1 }}
                         className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center"
                     >
                         <h3 className="text-xl font-bold text-foreground mb-2">{t("needAdvice")}</h3>

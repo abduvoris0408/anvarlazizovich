@@ -50,7 +50,7 @@ export function PartnersSection() {
                 ref={ref}
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="container mx-auto px-4"
             >
                 <motion.div

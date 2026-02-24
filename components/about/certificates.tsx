@@ -33,7 +33,7 @@ export function Certificates() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.3 }}
                         className="text-center mb-14"
                     >
                         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-4">
@@ -47,7 +47,7 @@ export function Certificates() {
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
                             className="mx-auto w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mt-4"
                         />
                         <p className="text-muted-foreground mt-4 max-w-lg mx-auto">
@@ -70,7 +70,7 @@ export function Certificates() {
                                     initial={{ opacity: 0, y: 25 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                                    transition={{ duration: 0.3, delay: index * 0.1, ease: "easeOut" }}
                                     whileHover={{ y: -4 }}
                                     className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                                 >

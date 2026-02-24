@@ -64,7 +64,7 @@ export function FAQSection() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.3 }}
                         className="text-center mb-12"
                     >
                         <div className="inline-flex p-3 rounded-2xl bg-primary/10 border border-primary/15 mb-4">

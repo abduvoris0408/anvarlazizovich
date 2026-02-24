@@ -97,7 +97,7 @@ export function Biography() {
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.3, delay: 0.15 }}
                 className="w-16 h-0.5 bg-gradient-to-r from-primary to-transparent mb-6 origin-left"
               />
 
@@ -109,7 +109,7 @@ export function Biography() {
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                      transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
                       className="text-muted-foreground leading-relaxed mb-4"
                     >
                       {paragraph}

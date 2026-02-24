@@ -48,11 +48,11 @@ export function Footer() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <Link href="/" className="flex items-center gap-2.5 mb-5 group">
-                <CourthouseLogo className="h-7 w-7 text-primary" />
+              <Link href="/" className="flex items-center gap-3 mb-5 group">
+                <CourthouseLogo className="h-11 w-11 text-primary" />
                 <div className="flex flex-col">
                   <span className="font-serif font-bold text-foreground text-lg leading-tight tracking-wide uppercase">Anvar</span>
-                  <span className="text-[10px] text-muted-foreground leading-none tracking-wider uppercase">yurist</span>
+                  <span className="text-[11px] text-muted-foreground leading-none tracking-wider uppercase">yurist</span>
                 </div>
               </Link>
               <p className="text-sm text-muted-foreground leading-relaxed">{t("desc")}</p>

@@ -149,7 +149,7 @@ export function LegalHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="mb-6"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium">
@@ -162,7 +162,7 @@ export function LegalHero() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-foreground mb-4 text-balance leading-[1.1]"
           >
             {name}
@@ -172,7 +172,7 @@ export function LegalHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gold-gradient mb-6"
           >
             {title}
@@ -182,7 +182,7 @@ export function LegalHero() {
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="divider-gold w-24 mx-auto mb-6"
           />
 
@@ -190,7 +190,7 @@ export function LegalHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 0.3, delay: 0.25 }}
             className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground leading-relaxed"
           >
             {about?.bio
@@ -204,7 +204,7 @@ export function LegalHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link href="/contact">
@@ -229,7 +229,7 @@ export function LegalHero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
           className="mt-16 sm:mt-20"
         >
           <div className="max-w-3xl mx-auto">
@@ -244,7 +244,7 @@ export function LegalHero() {
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.4, delay: 0.12 + index * 0.1 }}
                   className="text-center"
                 >
                   <p className="text-3xl sm:text-4xl font-serif font-bold text-primary">{stat.value}+</p>
@@ -263,7 +263,7 @@ export function LegalHero() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-12"
           >
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-3">

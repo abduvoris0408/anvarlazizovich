@@ -163,21 +163,79 @@
 
   /* Premium navbar glass — high blur, gold-tinted */
   .glass-navbar {
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    background: oklch(0.98 0.003 250 / 0.72);
-    border: 1px solid oklch(0.90 0.008 250 / 0.6);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    background: oklch(0.98 0.003 250 / 0.78);
+    border: 1px solid oklch(0.90 0.008 250 / 0.5);
     box-shadow:
       0 4px 30px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 oklch(1 0 0 / 0.4);
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 oklch(1 0 0 / 0.5);
   }
 
   :is(.dark) .glass-navbar {
-    background: oklch(0.16 0.025 260 / 0.65);
+    background: oklch(0.16 0.025 260 / 0.72);
     border-color: oklch(0.72 0.14 85 / 0.10);
     box-shadow:
-      0 4px 30px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 oklch(1 0 0 / 0.04);
+      0 4px 30px rgba(0, 0, 0, 0.30),
+      0 1px 3px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 oklch(1 0 0 / 0.05);
+  }
+
+  /* Scrolled navbar — gold bottom accent */
+  .glass-navbar-scrolled {
+    border-bottom: 1.5px solid oklch(0.65 0.12 85 / 0.25);
+  }
+
+  :is(.dark) .glass-navbar-scrolled {
+    border-bottom-color: oklch(0.72 0.14 85 / 0.20);
+  }
+
+  /* CTA shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    background-size: 200% 100%;
+    background-image: linear-gradient(120deg,
+        transparent 0%,
+        transparent 40%,
+        oklch(1 0 0 / 0.15) 50%,
+        transparent 60%,
+        transparent 100%);
+    background-position: -200% center;
+    transition: all 0.3s ease;
+  }
+
+  .btn-shimmer:hover {
+    animation: shimmer 1.2s ease-in-out;
+    box-shadow:
+      0 4px 20px oklch(0.65 0.12 85 / 0.30),
+      0 0 0 1px oklch(0.65 0.12 85 / 0.10);
+  }
+
+  :is(.dark) .btn-shimmer:hover {
+    box-shadow:
+      0 4px 20px oklch(0.72 0.14 85 / 0.25),
+      0 0 0 1px oklch(0.72 0.14 85 / 0.10);
+  }
+
+  /* Nav link hover glow */
+  .nav-link-glow:hover {
+    text-shadow: 0 0 20px oklch(0.65 0.12 85 / 0.3);
+  }
+
+  :is(.dark) .nav-link-glow:hover {
+    text-shadow: 0 0 20px oklch(0.72 0.14 85 / 0.3);
   }
 
   /* Glass card — bordered card, subtle gold accent hover */

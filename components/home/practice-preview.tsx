@@ -40,7 +40,7 @@ export function PracticePreview() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
           >
             <div>
@@ -129,7 +129,7 @@ export function PracticePreview() {
           {!isLoading && services.length === 0 && (
             <div className="p-12 rounded-2xl border border-border bg-card text-center">
               <Scale className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Xizmatlar haqida ma&apos;lumot mavjud emas.</p>
+              <p className="text-muted-foreground">{t("noData")}</p>
             </div>
           )}
         </div>

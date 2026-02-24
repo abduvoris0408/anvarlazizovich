@@ -12,7 +12,7 @@ export function NewsHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="mb-4"
           >
             <SectionBadge title="News & Articles" icon={BookOpen} />
@@ -21,7 +21,7 @@ export function NewsHero() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4"
           >
             Legal Articles
@@ -30,7 +30,7 @@ export function NewsHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="text-xl text-muted-foreground max-w-2xl mx-auto"
           >
             Useful information, news, and articles about important changes in legislation and the legal field.

@@ -50,11 +50,15 @@
         "whatIs": {
             "title": "Mediatsiya nima?",
             "desc1": "Mediatsiya - bu nizolarni hal qilishning muqobil usuli bo'lib, unda neytral uchinchi tomon (mediator) nizolashayotgan tomonlarga o'zaro maqbul yechim topishda yordam beradi.",
-            "desc2": "Mediatsiya jarayonida mediator qaror qabul qilmaydi, balki tomonlarni muloqotga yo'naltiradi va ularning manfaatlarini aniqlashga yordam beradi."
+            "desc2": "Mediatsiya jarayonida mediator qaror qabul qilmaydi, balki tomonlarni muloqotga yo'naltiradi va ularning manfaatlarini aniqlashga yordam beradi.",
+            "badgeTitle": "Asosiy tushunchalar",
+            "neutralTitle": "Neytral yondashuv",
+            "neutralDesc": "Mediator tomonlarning hech biriga qo'shilmaydi va neytral pozitsiyada turadi"
         },
         "benefits": {
             "title": "Mediatsiya afzalliklari",
             "subtitle": "Nima uchun mediatsiya sud jarayonlariga nisbatan samaraliroq bo'lishi mumkin?",
+            "badgeTitle": "Afzalliklar",
             "speed": {
                 "title": "Tezlik",
                 "desc": "Mediatsiya jarayoni odatda bir necha kundan bir necha haftagacha davom etadi, sud jarayonlari esa oylab cho'zilishi mumkin."
@@ -83,6 +87,9 @@
         "whenToUse": {
             "title": "Qachon mediatsiyaga murojaat qilish kerak?",
             "subtitle": "Mediatsiya quyidagi holatlarda samarali yechim bo'lishi mumkin",
+            "badgeTitle": "Qachon qo'llaniladi?",
+            "illustrationTitle": "O'zaro kelishuv",
+            "illustrationDesc": "Tomonlar o'zlari qaror qabul qiladi",
             "items": [
                 "Biznes hamkorlar o'rtasidagi nizolar",
                 "Oilaviy kelishmovchiliklar",
@@ -95,6 +102,7 @@
         "process": {
             "title": "Mediatsiya jarayoni",
             "subtitle": "Mediatsiya 4 bosqichda amalga oshiriladi",
+            "badgeTitle": "Jarayon",
             "steps": [
                 {
                     "title": "Dastlabki konsultatsiya",
@@ -123,7 +131,9 @@
         "noData": "Maqolalar haqida ma'lumot yuklanmoqda...",
         "backToAll": "Barcha maqolalar",
         "needAdvice": "Huquqiy maslahat kerakmi?",
-        "contactUs": "Biz bilan bog'laning"
+        "contactUs": "Biz bilan bog'laning",
+        "authorName": "Burxonov Anvar Lazizovich",
+        "authorRole": "Advokat va Sertifikatlangan Mediator"
     },
     "testimonials": {
         "title": "Mijozlar fikrlari",

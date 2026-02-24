@@ -1,16 +1,16 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import Link from "next/link"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { Link } from "@/i18n/routing"
 import { ArrowRight, Award, Phone } from "lucide-react"
 import { SectionBadge } from "@/components/ui/section-badge"
 import type { About } from "@/lib/types"
+import { useTranslations } from "next-intl"
 
 export function MediationCTA() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [about, setAbout] = useState<About | null>(null)
+  const t = useTranslations("mediation")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/about")
@@ -24,10 +24,10 @@ export function MediationCTA() {
   return (
     <section className="py-24">
       <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-4xl mx-auto">
@@ -37,42 +37,46 @@ export function MediationCTA() {
 
             <div className="relative p-8 sm:p-12 text-center">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.05 }}
               >
-                <SectionBadge title="Sertifikatlangan Mediator" icon={Award} />
+                <SectionBadge title={t("badge")} icon={Award} />
               </motion.div>
 
               <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
               >
-                Nizoni tinch yo&apos;l bilan hal qilishni xohlaysizmi?
+                {t("ctaTitle")}
               </motion.h2>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.15 }}
                 className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto"
               >
-                Mediatsiya orqali vaqt, pul tejang va munosabatlaringizni saqlang. Birinchi konsultatsiya bepul.
+                {t("ctaSubtitle")}
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 group"
                 >
-                  Mediatsiya bo&apos;yicha murojaat qilish
+                  {t("ctaBtn")}
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 

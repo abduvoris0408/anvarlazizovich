@@ -1,40 +1,43 @@
-"use client"
-
-export function CourthouseLogo({ className = "h-8 w-8" }: { className?: string }) {
+export function CourthouseLogo({ className = "h-10 w-10" }: { className?: string }) {
     return (
         <svg
-            viewBox="0 0 48 48"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            fill="none"
             className={className}
         >
-            {/* Pediment / Triangle top */}
-            <path
-                d="M24 4L6 18H42L24 4Z"
-                fill="currentColor"
-                opacity="0.9"
-            />
-            {/* Small circle detail in pediment */}
-            <circle cx="24" cy="13" r="2.5" fill="currentColor" opacity="0.3" />
+            {/* Base/Foundation */}
+            <rect x="15" y="85" width="70" height="5" rx="1" fill="currentColor" />
+            <rect x="20" y="78" width="60" height="4" rx="1" fill="currentColor" />
 
-            {/* Architrave / horizontal beam */}
-            <rect x="5" y="18" width="38" height="3" rx="0.5" fill="currentColor" />
+            {/* Columns */}
+            <rect x="24" y="42" width="6" height="36" rx="2" fill="currentColor" />
+            <rect x="38" y="42" width="6" height="36" rx="1" fill="currentColor" />
+            <rect x="56" y="42" width="6" height="36" rx="1" fill="currentColor" />
+            <rect x="70" y="42" width="6" height="36" rx="2" fill="currentColor" />
 
-            {/* Pillars */}
-            <rect x="9" y="21" width="3.5" height="18" rx="0.5" fill="currentColor" opacity="0.85" />
-            <rect x="17" y="21" width="3.5" height="18" rx="0.5" fill="currentColor" opacity="0.85" />
-            <rect x="27.5" y="21" width="3.5" height="18" rx="0.5" fill="currentColor" opacity="0.85" />
-            <rect x="35.5" y="21" width="3.5" height="18" rx="0.5" fill="currentColor" opacity="0.85" />
+            {/* Arches between columns */}
+            <path d="M30 78 V58 Q30 48 37 48 H38 V78" stroke="currentColor" strokeWidth="3" fill="none" />
+            <path d="M62 78 V58 Q62 48 69 48 H70 V78" stroke="currentColor" strokeWidth="3" fill="none" />
 
-            {/* Base / Steps */}
-            <rect x="4" y="39" width="40" height="2.5" rx="0.5" fill="currentColor" />
-            <rect x="2" y="41.5" width="44" height="2.5" rx="0.5" fill="currentColor" opacity="0.7" />
+            {/* Center door arch */}
+            <path d="M44 78 V55 Q44 44 50 44 Q56 44 56 55 V78" stroke="currentColor" strokeWidth="3" fill="none" />
 
-            {/* Pillar caps (capitals) */}
-            <rect x="8" y="20.5" width="5.5" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
-            <rect x="16" y="20.5" width="5.5" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
-            <rect x="26.5" y="20.5" width="5.5" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
-            <rect x="34.5" y="20.5" width="5.5" height="1.5" rx="0.5" fill="currentColor" opacity="0.6" />
+            {/* Beam above columns */}
+            <rect x="20" y="38" width="60" height="5" rx="1" fill="currentColor" />
+
+            {/* Roof / Pediment */}
+            <path d="M18 40 L50 12 L82 40 Z" stroke="currentColor" strokeWidth="4" fill="none" strokeLinejoin="round" />
+
+            {/* Inner triangle decoration */}
+            <path d="M35 38 L50 20 L65 38" stroke="currentColor" strokeWidth="3" fill="none" strokeLinejoin="round" />
+
+            {/* Small triangle at top */}
+            <path d="M44 32 L50 24 L56 32" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
+
+            {/* Horizontal bars in pediment */}
+            <line x1="28" y1="38" x2="72" y2="38" stroke="currentColor" strokeWidth="2" />
+            <line x1="32" y1="35" x2="68" y2="35" stroke="currentColor" strokeWidth="1.5" />
         </svg>
     )
 }

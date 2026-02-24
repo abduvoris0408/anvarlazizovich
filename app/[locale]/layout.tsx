@@ -66,6 +66,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: t("homeTitle"),
             description: t("homeDesc"),
         },
+        icons: {
+            icon: "/logo11.png",
+            apple: "/logo11.png",
+        },
     }
 }
 

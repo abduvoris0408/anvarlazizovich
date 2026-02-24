@@ -1,22 +1,20 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
 import { Scale, Users, HelpCircle } from "lucide-react"
 import { SectionBadge } from "@/components/ui/section-badge"
-import { WHAT_IS_MEDIATION } from "@/lib/constants"
+import { useTranslations } from "next-intl"
 
 export function WhatIsMediation() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const t = useTranslations("mediation")
 
   return (
     <section className="py-16">
       <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-4xl mx-auto">
@@ -24,41 +22,46 @@ export function WhatIsMediation() {
             {/* Left - Content */}
             <div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.05 }}
               >
-                <SectionBadge title="Asosiy tushunchalar" icon={HelpCircle} />
+                <SectionBadge title={t("whatIs.badgeTitle")} icon={HelpCircle} />
               </motion.div>
 
               <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6"
               >
-                {WHAT_IS_MEDIATION.title}
+                {t("whatIs.title")}
               </motion.h2>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.15 }}
                 className="prose prose-lg dark:prose-invert max-w-none"
               >
-                {WHAT_IS_MEDIATION.description.split("\n\n").map((paragraph: string, index: number) => (
-                  <p key={index} className="text-muted-foreground leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+                <p className="text-muted-foreground leading-relaxed">
+                  {t("whatIs.desc1")}
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t("whatIs.desc2")}
+                </p>
               </motion.div>
             </div>
 
             {/* Right - Illustration */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="relative"
             >
               <div className="aspect-square rounded-3xl border border-border bg-card hover:border-primary/20 transition-colors p-8 flex items-center justify-center">
@@ -73,10 +76,8 @@ export function WhatIsMediation() {
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Neytral yondashuv</h3>
-                  <p className="text-muted-foreground">
-                    Mediator tomonlarning hech biriga qo&apos;shilmaydi va neytral pozitsiyada turadi
-                  </p>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">{t("whatIs.neutralTitle")}</h3>
+                  <p className="text-muted-foreground">{t("whatIs.neutralDesc")}</p>
                 </div>
               </div>
             </motion.div>

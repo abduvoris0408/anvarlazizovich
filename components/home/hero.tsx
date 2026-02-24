@@ -25,7 +25,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="mb-4"
             >
               <Badge variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-sm">
@@ -38,7 +38,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="mb-4"
             >
               <h1 id="main-title" className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
@@ -51,7 +51,7 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground"
             >
               Beautiful, accessible components built with Tailwind CSS and Framer Motion. Copy, paste, and customize to
@@ -61,7 +61,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
               className="flex flex-col items-center gap-6"
             >
               {/* Decorative Elements */}
@@ -132,7 +132,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="mt-auto pb-8"
           >
             <div className="text-center">

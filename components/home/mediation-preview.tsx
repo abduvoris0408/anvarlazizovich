@@ -28,7 +28,7 @@ export function MediationPreview() {
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-6xl mx-auto">
@@ -36,7 +36,7 @@ export function MediationPreview() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
           >
             <div>

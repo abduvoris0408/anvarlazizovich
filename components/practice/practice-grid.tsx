@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from "react"
 import type { Service } from "@/lib/types"
 import { Scale, Shield, Heart, Briefcase, Building, Check } from "lucide-react"
 import { SectionBadge } from "@/components/ui/section-badge"
+import { useTranslations } from "next-intl"
 
 const iconMap: Record<string, React.ElementType> = {
   Scale,
@@ -21,6 +22,7 @@ export function PracticeGrid() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [services, setServices] = useState<Service[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const t = useTranslations("practice")
 
   useEffect(() => {
     fetch("https://portfolio-backend-rh0y.onrender.com/api/v1/services?limit=100")
@@ -67,7 +69,7 @@ export function PracticeGrid() {
           <div className="max-w-6xl mx-auto">
             <div className="rounded-3xl p-8 text-center max-w-2xl mx-auto border border-border bg-card">
               <Scale className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Xizmatlar haqida ma&apos;lumot mavjud emas.</p>
+              <p className="text-muted-foreground">{t("noData")}</p>
             </div>
           </div>
         </div>
@@ -83,7 +85,7 @@ export function PracticeGrid() {
         animate={{ opacity: 1, y: 0 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="container mx-auto px-4"
       >
         <div className="max-w-6xl mx-auto">
@@ -99,7 +101,7 @@ export function PracticeGrid() {
                   animate={{ opacity: 1, y: 0 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
                   className="group relative p-8 rounded-2xl border border-border bg-card hover:shadow-lg hover:shadow-primary/5 hover:border-primary/30 transition-all duration-300 cursor-pointer overflow-hidden"
                 >

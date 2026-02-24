@@ -1,16 +1,14 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import Link from "next/link"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { Link } from "@/i18n/routing"
 import type { News } from "@/lib/types"
 import { formatDate } from "@/lib/utils"
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export function ArticlesPreview() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
   const [articles, setArticles] = useState<News[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const t = useTranslations("articles")
@@ -64,19 +62,14 @@ export function ArticlesPreview() {
 
   return (
     <section className="py-16 sm:py-20">
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto px-4"
-      >
+      <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.3 }}
             className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
           >
             <div>
@@ -102,8 +95,9 @@ export function ArticlesPreview() {
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group"
               >
                 <Link href={`/news/${article.slug || article.id}`}>
@@ -150,7 +144,7 @@ export function ArticlesPreview() {
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{article.excerpt}</p>
 
                       <span className="inline-flex items-center gap-1.5 text-sm text-primary font-medium group-hover:gap-2.5 transition-all">
-                        O&apos;qish
+                        {t("readMore")}
                         <ArrowRight className="h-3.5 w-3.5" />
                       </span>
                     </div>
@@ -160,7 +154,7 @@ export function ArticlesPreview() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
