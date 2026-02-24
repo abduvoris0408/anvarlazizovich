@@ -7,6 +7,7 @@ import { getMessages, getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
 import NextTopLoader from "nextjs-toploader"
+import ReplainChat from "@/components/shared/replain-chat"
 
 const inter = Inter({
     subsets: ["latin", "cyrillic"],
@@ -92,6 +93,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                         {children}
                     </ThemeProvider>
                 </NextIntlClientProvider>
+                <ReplainChat />
             </body>
         </html>
     )
