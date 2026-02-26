@@ -45,7 +45,7 @@ export function PartnersSection() {
     if (partners.length === 0) return null
 
     return (
-        <section className="py-10 sm:py-12 border-y border-border/50 bg-muted/20">
+        <section className="py-6 sm:py-8">
             <motion.div
                 ref={ref}
                 initial={{ opacity: 0 }}

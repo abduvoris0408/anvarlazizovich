@@ -47,10 +47,10 @@ export function Footer() {
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
+            <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
               <Link href="/" className="flex items-center gap-3 mb-5 group">
                 <CourthouseLogo className="h-11 w-11 text-primary" />
-                <div className="flex flex-col">
+                <div className="flex flex-col text-left">
                   <span className="font-serif font-bold text-foreground text-lg leading-tight tracking-wide uppercase">Anvar</span>
                   <span className="text-[11px] text-muted-foreground leading-none tracking-wider uppercase">yurist</span>
                 </div>
@@ -59,7 +59,7 @@ export function Footer() {
             </div>
 
             {/* Navigation */}
-            <div>
+            <div className="text-center sm:text-left items-center sm:items-start flex flex-col">
               <h3 className="font-serif font-semibold text-foreground mb-5 text-base">{t("pages")}</h3>
               <ul className="space-y-3">
                 {navigation.map((item) => (
@@ -77,7 +77,7 @@ export function Footer() {
             </div>
 
             {/* Contact */}
-            <div>
+            <div className="text-center sm:text-left items-center sm:items-start flex flex-col">
               <h3 className="font-serif font-semibold text-foreground mb-5 text-base">{t("contactTitle")}</h3>
               <ul className="space-y-3">
                 <li>
@@ -119,9 +119,9 @@ export function Footer() {
             </div>
 
             {/* Address & Legal */}
-            <div>
+            <div className="text-center sm:text-left items-center sm:items-start flex flex-col">
               <h3 className="font-serif font-semibold text-foreground mb-5 text-base">Manzil</h3>
-              <div className="flex items-start gap-2.5 text-sm text-muted-foreground mb-6">
+              <div className="flex items-start justify-center sm:justify-start gap-2.5 text-sm text-muted-foreground mb-6">
                 <div className="p-1.5 rounded-md bg-primary/8 shrink-0 mt-0.5">
                   <MapPin className="h-3.5 w-3.5 text-primary" />
                 </div>
@@ -129,7 +129,7 @@ export function Footer() {
               </div>
 
               <h3 className="font-serif font-semibold text-foreground mb-3 text-base">{t("legal")}</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 flex flex-col items-center sm:items-start">
                 <li>
                   <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {t("privacy")}
@@ -148,9 +148,9 @@ export function Footer() {
           <div className="divider-gold mb-6" />
 
           {/* Bottom */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Burxonov Anvar Lazizovich. {t("copyright")}
+              © {new Date().getFullYear()} Burxonov Anvar Lazizovich.<br className="sm:hidden" /> {t("copyright")}
             </p>
             <div className="flex items-center gap-4">
               <a

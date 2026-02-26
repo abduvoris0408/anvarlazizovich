@@ -114,7 +114,7 @@ export function Header() {
         initial="hidden"
         animate="visible"
         variants={navContainerVariants}
-        className={`sticky top-4 z-[9999] mx-auto hidden w-full md:flex flex-row items-center justify-between rounded-2xl transition-all duration-500 ease-in-out backdrop-blur-xl bg-background/60 border border-border/50 ${isScrolled
+        className={`fixed top-4 left-0 right-0 z-[9999] mx-auto hidden w-full md:flex flex-row items-center justify-between rounded-2xl transition-all duration-500 ease-in-out backdrop-blur-2xl bg-background/25 border border-border/40 ${isScrolled
           ? "max-w-5xl px-5 py-2 glass-navbar-scrolled shadow-xl shadow-black/5 dark:shadow-black/20"
           : "max-w-[92%] px-7 py-3"
           }`}
@@ -220,7 +220,7 @@ export function Header() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`sticky top-3 z-[9999] mx-3 flex w-auto flex-row items-center justify-between rounded-2xl backdrop-blur-xl bg-background/60 border border-border/50 shadow-lg md:hidden px-4 py-2.5 transition-all duration-300 ${isScrolled ? "glass-navbar-scrolled" : ""
+        className={`fixed top-3 left-3 right-3 z-[9999] flex flex-row items-center justify-between rounded-2xl backdrop-blur-2xl bg-background/25 border border-border/40 shadow-lg md:hidden px-4 py-2.5 transition-all duration-300 ${isScrolled ? "glass-navbar-scrolled" : ""
           }`}
       >
         <Link className="flex items-center gap-3 group" href="/">
@@ -308,7 +308,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[9998] bg-black/40 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[9998] bg-black/40 backdrop-blur-md md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <motion.div
@@ -317,7 +317,7 @@ export function Header() {
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()}
-              className="absolute top-18 left-3 right-3 backdrop-blur-xl bg-background/95 rounded-2xl shadow-2xl p-5 border border-border/50"
+              className="absolute top-18 left-3 right-3 backdrop-blur-2xl bg-background/95 rounded-2xl shadow-2xl p-5 border border-border/50"
             >
               <nav className="flex flex-col space-y-1">
                 {navigation.map((item) => {

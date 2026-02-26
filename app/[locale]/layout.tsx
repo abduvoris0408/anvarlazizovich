@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Geist_Mono, Playfair_Display } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
@@ -9,9 +9,9 @@ import { notFound } from "next/navigation"
 import NextTopLoader from "nextjs-toploader"
 import ReplainChat from "@/components/shared/replain-chat"
 
-const inter = Inter({
-    subsets: ["latin", "cyrillic"],
-    variable: "--font-inter",
+const geistMono = Geist_Mono({
+    subsets: ["latin"],
+    variable: "--font-geist-mono",
 })
 
 const playfair = Playfair_Display({
@@ -86,7 +86,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
     return (
         <html lang={locale} suppressHydrationWarning>
-            <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+            <body className={`${geistMono.variable} ${playfair.variable} font-sans`}>
                 <NextTopLoader color="#C9A84C" showSpinner={false} height={3} />
                 <NextIntlClientProvider messages={messages}>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
