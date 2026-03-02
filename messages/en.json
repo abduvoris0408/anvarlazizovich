@@ -1,0 +1,297 @@
+{
+	"nav": {
+		"home": "Home",
+		"about": "About",
+		"practice": "Services",
+		"mediation": "Mediation",
+		"news": "News",
+		"blog": "Blog",
+		"contact": "Contact"
+	},
+	"header": {
+		"contactBtn": "Contact Us",
+		"requestHelp": "Request Legal Help",
+		"toggleTheme": "Toggle theme"
+	},
+	"hero": {
+		"slide1": {
+			"eyebrow": "Legal Consultation · Dispute Resolution",
+			"title": "Resolve your legal issues with a reliable and professional approach",
+			"desc": "Pre-trial dispute resolution, legal consultation and legal protection services — all in one place. We thoroughly analyze every case.",
+			"f1": "Pre-trial settlement and mediation",
+			"f2": "Civil and commercial disputes",
+			"f3": "Contracts and official documents",
+			"f4": "Professional legal consultation",
+			"cta1": "Get a free consultation",
+			"cta2": "View our services"
+		},
+		"slide2": {
+			"eyebrow": "Fast · Lawful · Effective",
+			"title": "We resolve your legal disputes quickly, lawfully and in a reliable way",
+			"desc": "Saving your time and money, we help resolve your issues at the pre-trial stage effectively. We are with you at every step of the process.",
+			"f1": "Without unnecessary court proceedings",
+			"f2": "Individual attention to each client",
+			"f3": "Confidentiality and trust guaranteed",
+			"f4": "Strategy grounded in practical experience",
+			"cta1": "Contact us right now",
+			"cta2": "Free initial consultation"
+		},
+		"slide3": {
+			"eyebrow": "Your Interests · Our Mission",
+			"title": "Your interests and rights are our primary mission and responsibility",
+			"desc": "Comprehensive solutions in professional legal services and legal protection. We resolve the issue and also prevent future risks.",
+			"f1": "Legal services in 10+ practice areas",
+			"f2": "Hundreds of successfully completed cases",
+			"f3": "Full legal support and representation",
+			"f4": "Reliable protection for the future",
+			"cta1": "Get consultation",
+			"cta2": "Start working together"
+		},
+		"stats": {
+			"experience": "Years of experience",
+			"clients": "Satisfied clients",
+			"cases": "Successful cases",
+			"success": "Positive outcomes"
+		},
+		"ticker": {
+			"t1": "Professional Legal Service",
+			"t2": "Confidentiality Guaranteed",
+			"t3": "500+ Successful Cases",
+			"t4": "15 Years of Experience",
+			"t5": "Fast Results",
+			"t6": "All Legal Practice Areas",
+			"t7": "Free Initial Consultation",
+			"t8": "24/7 Support"
+		}
+	},
+	"practice": {
+		"title": "Our Services",
+		"subtitle": "We provide professional services in the following legal areas",
+		"viewAll": "All Services",
+		"learnMore": "Learn More",
+		"noData": "No service information available"
+	},
+	"mediation": {
+		"title": "Mediation Service",
+		"subtitle": "Resolving disputes without court, with comfortable solutions for both parties",
+		"learnMore": "Learn More",
+		"badge": "Certified Mediator",
+		"ctaTitle": "Want to resolve a dispute peacefully?",
+		"ctaSubtitle": "Save time and money while preserving relationships through mediation. First consultation is free.",
+		"ctaBtn": "Request Mediation",
+		"whatIs": {
+			"title": "What is Mediation?",
+			"desc1": "Mediation is an alternative dispute resolution method where a neutral third party (mediator) helps disputing parties find a mutually acceptable solution.",
+			"desc2": "In mediation, the mediator does not make decisions but guides parties towards dialogue and helps identify their interests.",
+			"badgeTitle": "Basic Concepts",
+			"neutralTitle": "Neutral Approach",
+			"neutralDesc": "The mediator does not side with either party and maintains a neutral position"
+		},
+		"benefits": {
+			"title": "Benefits of Mediation",
+			"subtitle": "Why mediation can be more effective than court proceedings?",
+			"badgeTitle": "Benefits",
+			"speed": {
+				"title": "Speed",
+				"desc": "The mediation process usually takes from a few days to a few weeks, whereas court proceedings can last for months."
+			},
+			"cost": {
+				"title": "Cost-effective",
+				"desc": "Mediation costs are significantly lower than court fees. You save time and money."
+			},
+			"privacy": {
+				"title": "Confidentiality",
+				"desc": "Unlike court proceedings, mediation is confidential. Your case will not become public."
+			},
+			"relations": {
+				"title": "Preserving Relationships",
+				"desc": "Mediation helps preserve relationships between parties."
+			},
+			"control": {
+				"title": "Control",
+				"desc": "Parties have full control over the process and outcome. The decision is made by them."
+			},
+			"flexibility": {
+				"title": "Flexibility",
+				"desc": "The mediation process can be adapted to the needs of the parties."
+			}
+		},
+		"whenToUse": {
+			"title": "When to use Mediation?",
+			"subtitle": "Mediation can be an effective solution in the following cases",
+			"badgeTitle": "When to use?",
+			"illustrationTitle": "Mutual Agreement",
+			"illustrationDesc": "Parties make their own decisions",
+			"items": [
+				"Disputes between business partners",
+				"Family disagreements",
+				"Property disputes",
+				"Labor disputes",
+				"Contractual disputes",
+				"Disputes between neighbors"
+			]
+		},
+		"process": {
+			"title": "Mediation Process",
+			"subtitle": "Mediation is carried out in 4 stages",
+			"badgeTitle": "Process",
+			"steps": [
+				{
+					"title": "Preliminary Consultation",
+					"desc": "Separate discussion with parties and explanation of the mediation process."
+				},
+				{
+					"title": "Joint Session",
+					"desc": "Bringing parties together and discussing the problem."
+				},
+				{
+					"title": "Negotiations",
+					"desc": "Identifying parties' interests and searching for solution options."
+				},
+				{
+					"title": "Agreement",
+					"desc": "Reaching a mutually acceptable solution and drafting the agreement document."
+				}
+			]
+		}
+	},
+	"articles": {
+		"title": "News",
+		"subtitle": "Useful information and news in the legal field",
+		"viewAll": "All News",
+		"readMore": "Read",
+		"noData": "Loading article information...",
+		"backToAll": "All Articles",
+		"needAdvice": "Need legal advice?",
+		"contactUs": "Contact Us",
+		"authorName": "Burxonov Anvar Lazizovich",
+		"authorRole": "Lawyer & Certified Mediator"
+	},
+	"testimonials": {
+		"title": "Client Testimonials",
+		"subtitle": "What our clients say about successful cases",
+		"noData": "No testimonials yet"
+	},
+	"cta": {
+		"title": "Need legal help?",
+		"subtitle": "First consultation is free. Tell us about your problem and we will find the best solution together.",
+		"callNow": "Call Now",
+		"needAdvice": "Need legal advice?",
+		"practiceSubtitle": "First consultation is free. Explain your problem and we will offer the best solution.",
+		"contactBtn": "Contact Us"
+	},
+	"about": {
+		"heroTitle": "About Me",
+		"heroSubtitle": "Detailed information about a professional lawyer and certified mediator",
+		"biographyTitle": "Biography",
+		"biographyBadge": "Biography",
+		"educationTitle": "Education & Certificates",
+		"educationBadge": "Education",
+		"experienceTitle": "Work Experience",
+		"experienceBadge": "Experience",
+		"certificatesTitle": "Certificates & Achievements",
+		"certificatesBadge": "Achievements",
+		"certificatesSubtitle": "Achievements in professional activity",
+		"valuesTitle": "Values & Principles",
+		"valuesBadge": "Values",
+		"valuesSubtitle": "Core principles in my professional activity",
+		"skillsTitle": "Professional Skills",
+		"skillsBadge": "Skills",
+		"noData": "Loading information...",
+		"heroStats": {
+			"years": "Years experience",
+			"clients": "Happy clients",
+			"cases": "Completed cases",
+			"awards": "Awards"
+		}
+	},
+	"contact": {
+		"formTitle": "Request Legal Help",
+		"formSubtitle": "Fill out the form below",
+		"privacyTitle": "Your data is protected",
+		"privacyDesc": "Share your legal problems with us. All communications are protected by attorney-client privilege.",
+		"fullName": "Full Name",
+		"phone": "Phone Number",
+		"email": "Email Address",
+		"subject": "Subject",
+		"subjectPlaceholder": "E.g.: Contract Review",
+		"message": "Message",
+		"messagePlaceholder": "Describe your legal issue or question in detail...",
+		"submit": "Submit",
+		"submitting": "Sending...",
+		"successTitle": "Your request has been received!",
+		"successDesc": "We will contact you shortly. We usually reply within 24 hours.",
+		"errorGeneral": "An error occurred. Please try again.",
+		"errorNetwork": "Network error. Please check your internet connection.",
+		"infoTitle": "Contact Information",
+		"phoneLbl": "Phone",
+		"emailLbl": "Email",
+		"telegramLbl": "Telegram",
+		"addressLbl": "Address",
+		"workHoursTitle": "Working Hours",
+		"monFri": "Monday - Friday",
+		"sat": "Saturday",
+		"sun": "Sunday",
+		"dayOff": "Day Off",
+		"urgentNote": "In urgent cases, you can call at any time."
+	},
+	"footer": {
+		"desc": "Professional Lawyer & Certified Mediator. Reliable partner in legal matters.",
+		"pages": "Pages",
+		"contactTitle": "Contact",
+		"legal": "Legal",
+		"privacy": "Privacy Policy",
+		"terms": "Terms of Use",
+		"copyright": "All rights reserved."
+	},
+	"values": {
+		"integrity": {
+			"title": "Integrity",
+			"desc": "We adhere to principles of honesty and transparency in every case."
+		},
+		"professionalism": {
+			"title": "Professionalism",
+			"desc": "We provide highly qualified legal services."
+		},
+		"dedication": {
+			"title": "Dedication",
+			"desc": "We are fully dedicated to protecting the rights of every client."
+		},
+		"trust": {
+			"title": "Trust",
+			"desc": "We build long-term relationships of trust with our clients."
+		}
+	},
+	"meta": {
+		"homeTitle": "Burxonov Anvar Lazizovich - Lawyer & Certified Mediator",
+		"homeDesc": "Professional legal services: civil, criminal, family, labor law and mediation. 15+ years of experience, 500+ successful cases.",
+		"aboutTitle": "About Me",
+		"practiceTitle": "Services",
+		"mediationTitle": "Mediation",
+		"newsTitle": "News",
+		"contactTitle": "Contact",
+		"blogTitle": "Blog"
+	},
+	"partners": {
+		"title": "Our Partners",
+		"subtitle": "Organizations we cooperate with",
+		"trustedBy": "Trusted by our partners"
+	},
+	"faq": {
+		"title": "Frequently Asked Questions",
+		"subtitle": "Answers to the most frequently asked questions"
+	},
+	"skills": {
+		"title": "Professional Skills"
+	},
+	"blog": {
+		"title": "Blog",
+		"readMore": "Read More",
+		"backToAll": "All Articles",
+		"minRead": "min read",
+		"views": "views",
+		"noData": "No articles found",
+		"needAdvice": "Have a question on this topic?",
+		"contactUs": "Get Free Consultation"
+	}
+}
